@@ -5,10 +5,10 @@
     background-color: #ffffff; 
     color: #ffffff;
     padding: 10px;
-    border-bottom-style: solid;
-    border-color: #0033a0;
   }
-  
+  .navigation{
+    margin-bottom: 0px;
+  }
   .header img {
     max-width: 100px; 
     height: auto;
