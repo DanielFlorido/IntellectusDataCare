@@ -1,0 +1,42 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff; 
+    color: #ffffff;
+    padding: 10px;
+    border-bottom-style: solid;
+    border-color: #0033a0;
+  }
+  
+  .header img {
+    max-width: 100px; 
+    height: auto;
+  }
+  
+  .left-image {
+    margin-left: 0;
+  }
+  
+  .center-image {
+    margin: 0 auto;
+  }
+  
+  .right-image {
+    margin-right: 0;
+  }
+  
+  @media (max-width: 200px) {
+    .header {
+      flex-direction: column;
+    }
+  
+    .header img {
+      margin: 10px 0;
+    }
+  
+    .center-image {
+      order: -1;
+    }
+  }
+  
