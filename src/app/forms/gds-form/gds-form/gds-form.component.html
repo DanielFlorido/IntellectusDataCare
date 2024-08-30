@@ -1,0 +1,26 @@
+<form (ngSubmit)="onSubmit(gdsForm)" #gdsForm="ngForm">
+    <div>
+      <label for="patientId">ID del paciente:</label>
+      <input type="text" id="patientId" name="patientId" ngModel required>
+    </div>
+    <div>
+      <label for="date">Fecha:</label>
+      <input type="date" id="date" name="date" ngModel required>
+    </div>
+  
+    <div *ngFor="let question of questions; let i = index">
+      <label>{{ question.question }}</label>
+      <div>
+        <input type="radio" [name]="'question' + i" [value]="true" [(ngModel)]="questions[i].answer" required> Sí
+        <input type="radio" [name]="'question' + i" [value]="false" [(ngModel)]="questions[i].answer"> No
+      </div>
+    </div>
+  
+    <div>
+      <label>Total:</label>
+      <input type="text" [value]="calculateTotalScore()" readonly>
+    </div>
+  
+    <button type="submit">Enviar</button>
+  </form>
+  

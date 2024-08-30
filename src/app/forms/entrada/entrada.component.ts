@@ -33,7 +33,31 @@ export class EntradaComponent {
     remite: '********',
     longitudinal: true
   }
-  onSubmit(){
+  onSubmit(form: NgForm) {
+    this.informacionGeneral = {
+      numeroAtencion: form.value.numeroAtencion,
+      cedula: form.value.cedula,
+      nombre: form.value.nombre,
+      fechaNacimiento: form.value.fechaNacimiento,
+      anosEscolaridad: form.value.anosEscolaridad,
+      fechaEvaluacion1: form.value.fechaEvaluacion1,
+      edad: form.value.edad,
+      lateralidad: form.value.lateralidad,
+      telefonoPaciente: form.value.telefonoPaciente,
+      telefonoAcompanante: form.value.telefonoAcompanante,
+      emailContacto: form.value.emailContacto,
+      ocupacionPrevia: form.value.ocupacionPrevia,
+      ocupacionActual: form.value.ocupacionActual,
+      ocupacionMayorTiempo: form.value.ocupacionMayorTiempo,
+      ciudad: form.value.ciudad,
+      lugarVivienda: form.value.lugarVivienda,
+      informanteCuidador: form.value.informanteCuidador,
+      parentesco: form.value.parentesco,
+      aseguradora: form.value.aseguradora,
+      remite: form.value.remite,
+      longitudinal: form.value.longitudinal
+    };
+
     console.log(this.informacionGeneral);
   };
 }
