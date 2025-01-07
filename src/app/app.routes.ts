@@ -8,6 +8,7 @@ import { InformeComponent } from './tabs/informe/informe.component';
 import { ConclusionesComponent } from './tabs/conclusiones/conclusiones.component';
 import { NoEncontradoComponent } from './errors/noEncontrado/no-encontrado/no-encontrado.component';
 import { HomeComponent } from './home/home.component';
+import { ListaPacientesComponent } from './tabs/lista-pacientes/lista-pacientes.component';
 
 export const routes: Routes = [
     {
@@ -44,5 +45,10 @@ export const routes: Routes = [
         path: 'infogeneral',
         component: InfogeneralComponent,
         title: 'Informacion General'
+    },
+    {
+        path: '',
+        component: ListaPacientesComponent,
+        title: 'Pacientes'
     }
 ];

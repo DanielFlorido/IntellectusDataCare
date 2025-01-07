@@ -1,0 +1,22 @@
+<div *ngIf="paginatedData">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>cedula</th>
+          <th>nombre</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of paginatedData.content">
+          <td>{{ item.cedula }}</td>
+          <td>{{ item.nombre }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination-controls">
+      <button (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+      <button (click)="nextPage()" [disabled]="currentPage === paginatedData.totalPages - 1">Next</button>
+    </div>
+</div>
+  

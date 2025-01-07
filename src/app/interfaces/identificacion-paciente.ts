@@ -2,6 +2,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 export interface IDP {
     IDP_NumAt: number; // Número de atención
+    IDP_Cedu: number; //cedula paciente
     IDP_Nombr: string; // Nombre del paciente
     IDP_FecNa: Date; // Fecha de nacimiento
     IDP_AnyEs: number; // Años de escolaridad
@@ -53,6 +54,7 @@ export class IDPForm {
         IDP_Talla: new FormControl(null, [Validators.required, Validators.min(0)]),
         IDP_peso0: new FormControl(null, [Validators.required, Validators.min(0)]),
         IDP_IndMC: new FormControl(null, [Validators.required, Validators.min(0)]),
+        IDP_Cedu: new FormControl(null, [Validators.required, Validators.minLength(100), Validators.maxLength(10000000)])
       });
     }
     static getPacienteFromForm(form: FormGroup): IDP {
@@ -81,6 +83,7 @@ export class IDPForm {
           IDP_Talla: form.get('IDP_Talla')?.value,
           IDP_peso0: form.get('IDP_peso0')?.value,
           IDP_IndMC: form.get('IDP_IndMC')?.value,
+          IDP_Cedu: form.get('IDP_Cedu')?.value
         };
     }
 }
