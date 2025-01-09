@@ -1,73 +1,201 @@
-<form [formGroup]="pacienteForm" (ngSubmit)="onSubmit()">
+<div class="component">
+  <h2>Identificacion</h2>
+  <form [formGroup]="pacienteForm" (ngSubmit)="onSubmit()">
     <!-- Número de atención -->
-    <div>
+    <div class="pregunta">
       <label for="IDP_NumAt">Número de Atención</label>
-      <input id="IDP_NumAt" formControlName="IDP_NumAt" type="number" />
-      <div *ngIf="pacienteForm.get('IDP_NumAt')?.invalid && pacienteForm.get('IDP_NumAt')?.touched">
+      <input id="IDP_NumAt" formControlName="IDP_NumAt" type="number" />       
+      <div class="error" *ngIf="pacienteForm.get('IDP_NumAt')?.invalid && pacienteForm.get('IDP_NumAt')?.touched">
         <small *ngIf="pacienteForm.get('IDP_NumAt')?.errors?.['required']">El número de atención es obligatorio.</small>
       </div>
+      
     </div>
-  
+    
+    <!-- Número de cedula -->
+    <div class="pregunta">
+      <label for="IDP_Cedu">Cédula</label>
+      <input id="IDP_Cedu" formControlName="IDP_Cedu" type="number" />
+      <div class="error" *ngIf="pacienteForm.get('IDP_NumAt')?.invalid && pacienteForm.get('IDP_NumAt')?.touched">
+        <small *ngIf="pacienteForm.get('IDP_NumAt')?.errors?.['required']">El número de cédula es obligatorio.</small>
+      </div>
+    </div>
+    
     <!-- Nombre del paciente -->
-    <div>
-      <label for="IDP_Nombr">Nombre del Paciente</label>
+    <div class="pregunta">
+      <label for="IDP_Nombr">Nombre</label>
       <input id="IDP_Nombr" formControlName="IDP_Nombr" type="text" />
-      <div *ngIf="pacienteForm.get('IDP_Nombr')?.invalid && pacienteForm.get('IDP_Nombr')?.touched">
+      <div class="error" *ngIf="pacienteForm.get('IDP_Nombr')?.invalid && pacienteForm.get('IDP_Nombr')?.touched">
         <small *ngIf="pacienteForm.get('IDP_Nombr')?.errors?.['required']">El nombre es obligatorio.</small>
         <small *ngIf="pacienteForm.get('IDP_Nombr')?.errors?.['maxlength']">Máximo 100 caracteres.</small>
       </div>
     </div>
-  
+
     <!-- Fecha de nacimiento -->
-    <div>
+    <div class="pregunta">
       <label for="IDP_FecNa">Fecha de Nacimiento</label>
       <input id="IDP_FecNa" formControlName="IDP_FecNa" type="date" />
-      <div *ngIf="pacienteForm.get('IDP_FecNa')?.invalid && pacienteForm.get('IDP_FecNa')?.touched">
-        <small *ngIf="pacienteForm.get('IDP_FecNa')?.errors?.['required']">La fecha de nacimiento es obligatoria.</small>
+      <div class="error" *ngIf="pacienteForm.get('IDP_FecNa')?.invalid && pacienteForm.get('IDP_FecNa')?.touched">
+        <small *ngIf="pacienteForm.get('IDP_FecNa')?.errors?.['required']">La fecha de nacimiento es
+          obligatoria.</small>
       </div>
     </div>
-  
+
     <!-- Años de escolaridad -->
-    <div>
+    <div class="pregunta">
       <label for="IDP_AnyEs">Años de Escolaridad</label>
       <input id="IDP_AnyEs" formControlName="IDP_AnyEs" type="number" />
-      <div *ngIf="pacienteForm.get('IDP_AnyEs')?.invalid && pacienteForm.get('IDP_AnyEs')?.touched">
-        <small *ngIf="pacienteForm.get('IDP_AnyEs')?.errors?.['required']">Los años de escolaridad son obligatorios.</small>
+      <div class="error" *ngIf="pacienteForm.get('IDP_AnyEs')?.invalid && pacienteForm.get('IDP_AnyEs')?.touched">
+        <small *ngIf="pacienteForm.get('IDP_AnyEs')?.errors?.['required']">Los años de escolaridad son
+          obligatorios.</small>
         <small *ngIf="pacienteForm.get('IDP_AnyEs')?.errors?.['min']">El valor debe ser positivo.</small>
       </div>
     </div>
-  
+    <!-- Fecha de de evaluacion -->
+    <div class="pregunta">
+      <label for="IDP_FecNa">Fecha de evaluación</label>
+      <input id="IDP_FecNa" formControlName="IDP_FecNa" type="date" />
+      <div class="error" *ngIf="pacienteForm.get('IDP_FecNa')?.invalid && pacienteForm.get('IDP_FecNa')?.touched">
+        <small *ngIf="pacienteForm.get('IDP_FecNa')?.errors?.['required']">La fecha de nacimiento es
+          obligatoria.</small>
+      </div>
+    </div>
     <!-- Edad -->
-    <div>
+    <div class="pregunta">
       <label for="IDP_Edad0">Edad</label>
       <input id="IDP_Edad0" formControlName="IDP_Edad0" type="number" />
-      <div *ngIf="pacienteForm.get('IDP_Edad0')?.invalid && pacienteForm.get('IDP_Edad0')?.touched">
+      <div class="error" *ngIf="pacienteForm.get('IDP_Edad0')?.invalid && pacienteForm.get('IDP_Edad0')?.touched">
         <small *ngIf="pacienteForm.get('IDP_Edad0')?.errors?.['required']">La edad es obligatoria.</small>
         <small *ngIf="pacienteForm.get('IDP_Edad0')?.errors?.['min']">La edad debe ser positiva.</small>
       </div>
     </div>
-  
+
     <!-- Lateralidad -->
-    <div>
+    <div class="pregunta">
       <label for="IDP_Later">Lateralidad</label>
-      <input id="IDP_Later" formControlName="IDP_Later" type="text" />
-      <div *ngIf="pacienteForm.get('IDP_Later')?.invalid && pacienteForm.get('IDP_Later')?.touched">
-        <small *ngIf="pacienteForm.get('IDP_Later')?.errors?.['required']">La lateralidad es obligatoria.</small>
+      <select id="IDP_Later" required>
+        <option value="">Seleccione una opción</option>
+        <option value="Derecha">Derecha</option>
+        <option value="Izquierda">Izquierda</option>
+        <option value="Ambidiestro">Ambidiestro</option>
+      </select>
+      <div class="error" *ngIf="pacienteForm.get('IDP_Later')?.invalid && pacienteForm.get('IDP_Later')?.touched" class="text-danger">
+        Seleccione una lateralidad válida.
       </div>
     </div>
-  
+
+
+    <!-- telefono paciente -->
+    <div class="pregunta">
+      <label for="IDP_Edad0">Telefono Paciente</label>
+      <input id="IDP_Edad0" formControlName="IDP_Edad0" type="number" />
+      <div class="error" *ngIf="pacienteForm.get('IDP_Edad0')?.invalid && pacienteForm.get('IDP_Edad0')?.touched">
+        <small *ngIf="pacienteForm.get('IDP_Edad0')?.errors?.['required']">La edad es obligatoria.</small>
+        <small *ngIf="pacienteForm.get('IDP_Edad0')?.errors?.['min']">La edad debe ser positiva.</small>
+      </div>
+    </div>
+    <!-- telefono acompañante -->
+    <div class="pregunta">
+      <label for="IDP_Edad0">Telefono acompañante</label>
+      <input id="IDP_Edad0" formControlName="IDP_Edad0" type="number" />
+      <div class="error" *ngIf="pacienteForm.get('IDP_Edad0')?.invalid && pacienteForm.get('IDP_Edad0')?.touched">
+        <small *ngIf="pacienteForm.get('IDP_Edad0')?.errors?.['required']">La edad es obligatoria.</small>
+      </div>
+    </div>
+
+    <!-- email de contacto -->
+    <div class="pregunta">
+      <label for="IDP_Edad0">Email de contacto</label>
+      <input id="IDP_Edad0" formControlName="IDP_Edad0" type="email" />
+      <div class="error" *ngIf="pacienteForm.get('IDP_Edad0')?.invalid && pacienteForm.get('IDP_Edad0')?.touched">
+        <small *ngIf="pacienteForm.get('IDP_Edad0')?.errors?.['required']">La edad es obligatoria.</small>
+        <small *ngIf="pacienteForm.get('IDP_Edad0')?.errors?.['min']">La edad debe ser positiva.</small>
+      </div>
+    </div>
+
     <!-- Ocupación previa -->
-    <div>
+    <div class="pregunta">
       <label for="IDP_OcuPr">Ocupación Previa</label>
       <input id="IDP_OcuPr" formControlName="IDP_OcuPr" type="text" />
-      <div *ngIf="pacienteForm.get('IDP_OcuPr')?.invalid && pacienteForm.get('IDP_OcuPr')?.touched">
+      <div class="error" *ngIf="pacienteForm.get('IDP_OcuPr')?.invalid && pacienteForm.get('IDP_OcuPr')?.touched">
         <small *ngIf="pacienteForm.get('IDP_OcuPr')?.errors?.['maxlength']">Máximo 100 caracteres.</small>
       </div>
     </div>
-  
+
+    <!-- Ocupación actual  -->
+    <div class="pregunta">
+      <label for="IDP_OcuPr">Ocupación actual</label>
+      <input id="IDP_OcuPr" formControlName="IDP_OcuPr" type="text" />
+      <div class="error" *ngIf="pacienteForm.get('IDP_OcuPr')?.invalid && pacienteForm.get('IDP_OcuPr')?.touched">
+        <small *ngIf="pacienteForm.get('IDP_OcuPr')?.errors?.['maxlength']">Máximo 100 caracteres.</small>
+      </div>
+    </div>
+    <!-- Ocupación a la que se dedico mas tiempo -->
+    <div class="pregunta">
+      <label for="IDP_OcuPr">Ocupación a la que se dedico mas tiempo</label>
+      <input id="IDP_OcuPr" formControlName="IDP_OcuPr" type="text" />
+      <div class="error" *ngIf="pacienteForm.get('IDP_OcuPr')?.invalid && pacienteForm.get('IDP_OcuPr')?.touched">
+        <small *ngIf="pacienteForm.get('IDP_OcuPr')?.errors?.['maxlength']">Máximo 100 caracteres.</small>
+      </div>
+    </div>
+    <!-- Ciudad -->
+    <div class="pregunta">
+      <label for="IDP_OcuPr">Ocupación Previa</label>
+      <input id="IDP_OcuPr" formControlName="IDP_OcuPr" type="text" />
+      <div class="error" *ngIf="pacienteForm.get('IDP_OcuPr')?.invalid && pacienteForm.get('IDP_OcuPr')?.touched">
+        <small *ngIf="pacienteForm.get('IDP_OcuPr')?.errors?.['maxlength']">Máximo 100 caracteres.</small>
+      </div>
+    </div>
+    <!-- lugar de vivienda -->
+    <div class="pregunta">
+      <label for="IDP_OcuPr">Lugar de vivienda</label>
+      <input id="IDP_OcuPr" formControlName="IDP_OcuPr" type="text" />
+      <div class="error" *ngIf="pacienteForm.get('IDP_OcuPr')?.invalid && pacienteForm.get('IDP_OcuPr')?.touched">
+        <small *ngIf="pacienteForm.get('IDP_OcuPr')?.errors?.['maxlength']">Máximo 100 caracteres.</small>
+      </div>
+    </div>
+    <!-- Informante/Cuidador -->
+    <div class="pregunta">
+      <label for="IDP_OcuPr">Informante/Cuidador</label>
+      <input id="IDP_OcuPr" formControlName="IDP_OcuPr" type="text" />
+      <div class="error" *ngIf="pacienteForm.get('IDP_OcuPr')?.invalid && pacienteForm.get('IDP_OcuPr')?.touched">
+        <small *ngIf="pacienteForm.get('IDP_OcuPr')?.errors?.['maxlength']">Máximo 100 caracteres.</small>
+      </div>
+    </div>
+    <!-- Parentesco -->
+    <div class="pregunta">
+      <label for="IDP_OcuPr">Parentesco</label>
+      <input id="IDP_OcuPr" formControlName="IDP_OcuPr" type="text" />
+      <div class="error" *ngIf="pacienteForm.get('IDP_OcuPr')?.invalid && pacienteForm.get('IDP_OcuPr')?.touched">
+        <small *ngIf="pacienteForm.get('IDP_OcuPr')?.errors?.['maxlength']">Máximo 100 caracteres.</small>
+      </div>
+    </div>
+    <!-- Aseguradora -->
+    <div class="pregunta">
+      <label for="IDP_OcuPr">Aseguradora</label>
+      <input id="IDP_OcuPr" formControlName="IDP_OcuPr" type="text" />
+      <div class="error" *ngIf="pacienteForm.get('IDP_OcuPr')?.invalid && pacienteForm.get('IDP_OcuPr')?.touched">
+        <small *ngIf="pacienteForm.get('IDP_OcuPr')?.errors?.['maxlength']">Máximo 100 caracteres.</small>
+      </div>
+    </div>
+    <!-- remite -->
+    <div class="pregunta">
+      <label for="IDP_OcuPr">Remite</label>
+      <input id="IDP_OcuPr" formControlName="IDP_OcuPr" type="text" />
+      <div class="error" *ngIf="pacienteForm.get('IDP_OcuPr')?.invalid && pacienteForm.get('IDP_OcuPr')?.touched">
+        <small *ngIf="pacienteForm.get('IDP_OcuPr')?.errors?.['maxlength']">Máximo 100 caracteres.</small>
+      </div>
+    </div>
+    <!-- Longitudinal -->
+    <div class="pregunta">
+      <label for="IDP_OcuPr">Longitudinal</label>
+      <input id="IDP_OcuPr" formControlName="IDP_OcuPr" type="checkbox" />
+      <div class="error" *ngIf="pacienteForm.get('IDP_OcuPr')?.invalid && pacienteForm.get('IDP_OcuPr')?.touched">
+        <small *ngIf="pacienteForm.get('IDP_OcuPr')?.errors?.['maxlength']">Máximo 100 caracteres.</small>
+      </div>
+    </div>
     <!-- Botón de envío -->
     <div>
       <button type="submit" [disabled]="pacienteForm.invalid">Enviar</button>
     </div>
   </form>
-  
+</div>
