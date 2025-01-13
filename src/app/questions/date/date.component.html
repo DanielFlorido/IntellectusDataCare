@@ -1,0 +1,7 @@
+<div class="pregunta">
+    <label>{{question.label}}</label>
+    <input [formControl]="control" type="date" />
+    <div class="error" *ngIf="control.invalid && control.touched">
+      <small *ngIf="control.errors?.['required']">La fecha es obligatoria.</small>
+    </div>
+</div>
