@@ -4,13 +4,13 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-text',
+  selector: 'app-number',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './text.component.html',
-  styleUrl: './text.component.css'
+  templateUrl: './number.component.html',
+  styleUrl: './number.component.css'
 })
-export class TextComponent {
+export class NumberComponent {
   @Input('question')
   question!: Question;
   @Input('control')

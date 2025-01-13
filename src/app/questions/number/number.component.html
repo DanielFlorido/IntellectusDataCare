@@ -1,8 +1,9 @@
 <div class="pregunta">
     <label>{{question.label}}</label>
-    <input [formControl]="control" type="text" />
+    <input [formControl]= "control" type="number" />
     <div class="error" *ngIf="control.invalid && control.touched">
       <small *ngIf="control.errors?.['required']">El campo es obligatorio.</small>
-      <small *ngIf="control.errors?.['maxlength']">Máximo 100 caracteres.</small>
+      <small *ngIf="control.errors?.['min']">El Minimo es 0.</small>
+      <small *ngIf="control.errors?.['max']">El Maximo es 15.</small>
     </div>
 </div>

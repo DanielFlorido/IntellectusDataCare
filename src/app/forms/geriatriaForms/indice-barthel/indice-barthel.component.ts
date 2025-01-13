@@ -3,11 +3,13 @@ import { Question } from '../../../interfaces/question';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { OptionsComponent } from "../../../questions/options/options.component";
+import { TextComponent } from "../../../questions/text/text.component";
+import { NumberComponent } from "../../../questions/number/number.component";
 
 @Component({
   selector: 'app-indice-barthel',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, OptionsComponent],
+  imports: [ReactiveFormsModule, CommonModule, OptionsComponent, TextComponent, NumberComponent],
   templateUrl: './indice-barthel.component.html',
   styleUrl: './indice-barthel.component.css'
 })
@@ -16,7 +18,8 @@ export class IndiceBarthelComponent implements OnInit {
   questions: Question[]=[
     {id:'pregunta1',label:'pregunta1', type: 'select',validators:[Validators.required], options:['opcion1', 'opcion2']},
     {id:'pregunta2',label:'pregunta2', type: 'select',validators:[Validators.required], options:['opcion1', 'opcion2']},
-    {id:'pregunta3',label:'pregunta3', type: 'text',validators:[Validators.required]}
+    {id:'pregunta3',label:'pregunta3', type: 'text',validators:[Validators.required]},
+    {id:'pregunta4', label: 'pregunta4', type: 'number', validators: [Validators.required, Validators.max(15), Validators.min(0)]}
   ]
   form! :FormGroup;
 
