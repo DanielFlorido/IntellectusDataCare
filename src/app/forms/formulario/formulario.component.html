@@ -1,0 +1,11 @@
+<form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div *ngFor="let question of questions">
+        <app-options *ngIf="question.type==='select'" [question]="question" [control]="getControl(question.id)"></app-options>
+        <app-text *ngIf="question.type==='text'" [question]="question" [control]="getControl(question.id)"></app-text>
+        <app-number *ngIf="question.type==='number'" [question]="question" [control]="getControl(question.id)"></app-number>
+        <app-date *ngIf="question.type==='date'" [question]="question" [control]="getControl(question.id)"></app-date>
+        <app-yes-no-question *ngIf="question.type==='yesNo'" [question]="question" [control]="getControl(question.id)"></app-yes-no-question>
+        <app-options-value *ngIf="question.type=== 'selectValue'" [question]="question" [control]="getControl(question.id)"></app-options-value>
+    </div>  
+    <button type="submit">Enviar</button>
+</form> 
