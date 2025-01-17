@@ -1,1 +1,11 @@
-<p>yes-no-question works!</p>
+<div class="pregunta" >
+    <label>{{question.label}}</label>
+    <select [formControl] = "control">   
+        <option *ngFor="let option of question.options" [value]="option">
+            {{ option }}
+        </option>        
+    </select>
+    <div class="error" *ngIf= "control.invalid && control.touched">
+        <small *ngIf="control.errors?.['required']">Se requiere la pregunta</small> 
+    </div>
+</div>

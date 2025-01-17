@@ -4,6 +4,7 @@
         <app-text *ngIf="question.type==='text'" [question]="question" [control]="getControl(question.id)"></app-text>
         <app-number *ngIf="question.type==='number'" [question]="question" [control]="getControl(question.id)"></app-number>
         <app-date *ngIf="question.type==='date'" [question]="question" [control]="getControl(question.id)"></app-date>
+        <app-yes-no-question *ngIf="question.type==='yesNo'" [question]="question" [control]="getControl(question.id)"></app-yes-no-question>
     </div>  
     <button type="submit">Enviar</button>
 </form>

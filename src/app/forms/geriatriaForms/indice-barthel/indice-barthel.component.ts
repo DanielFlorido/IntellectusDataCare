@@ -6,11 +6,12 @@ import { OptionsComponent } from "../../../questions/options/options.component";
 import { TextComponent } from "../../../questions/text/text.component";
 import { NumberComponent } from "../../../questions/number/number.component";
 import { DateComponent } from "../../../questions/date/date.component";
+import { YesNoQuestionComponent } from "../../../questions/yes-no-question/yes-no-question.component";
 
 @Component({
   selector: 'app-indice-barthel',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, OptionsComponent, TextComponent, NumberComponent, DateComponent],
+  imports: [ReactiveFormsModule, CommonModule, OptionsComponent, TextComponent, NumberComponent, DateComponent, YesNoQuestionComponent],
   templateUrl: './indice-barthel.component.html',
   styleUrl: './indice-barthel.component.css'
 })
@@ -21,7 +22,8 @@ export class IndiceBarthelComponent implements OnInit {
     {id:'pregunta2',label:'pregunta2', type: 'select',validators:[Validators.required], options:['opcion1', 'opcion2']},
     {id:'pregunta3',label:'pregunta3', type: 'text',validators:[Validators.required]},
     {id:'pregunta4', label: 'pregunta4', type: 'number', validators: [Validators.required, Validators.max(15), Validators.min(0)]},
-    {id:'pregunta5', label: 'pregunta5', type: 'date', validators: [Validators.required]}
+    {id:'pregunta5', label: 'pregunta5', type: 'date', validators: [Validators.required]},
+    {id:'pregunta6', label: 'pregunta6', type: 'yesNo', validators: [Validators.required]}
   ]
   form! :FormGroup;
 
