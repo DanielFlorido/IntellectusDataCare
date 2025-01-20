@@ -4,11 +4,13 @@ import { PreguntasComponent } from "../../forms/geriatriaForms/preguntas/pregunt
 import { ActividadPfefferComponent } from "../../forms/geriatriaForms/actividad-pfeffer/actividad-pfeffer.component";
 import { QSMFComponent } from "../../forms/geriatriaForms/qsm-f/qsm-f.component";
 import { StopBangComponent } from "../../forms/geriatriaForms/stop-bang/stop-bang.component";
+import { FesIComponent } from "../../forms/geriatriaForms/fes-i/fes-i.component";
+import { MnaSfComponent } from "../../forms/geriatriaForms/mna-sf/mna-sf.component";
 
 @Component({
   selector: 'app-geriatria',
   standalone: true,
-  imports: [IndiceBarthelComponent, PreguntasComponent, ActividadPfefferComponent, QSMFComponent, StopBangComponent],
+  imports: [IndiceBarthelComponent, PreguntasComponent, ActividadPfefferComponent, QSMFComponent, StopBangComponent, FesIComponent, MnaSfComponent],
   templateUrl: './geriatria.component.html',
   styleUrl: './geriatria.component.css'
 })
