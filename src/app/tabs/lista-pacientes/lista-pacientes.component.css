@@ -1,3 +1,4 @@
+@import '../../shared/shared-styles/shared.styles.css';
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -16,4 +17,3 @@
   justify-content: space-between;
 }
 
-@import '../../shared/shared-styles/shared.styles.css';

@@ -1,0 +1,9 @@
+.app-component {
+    min-width: 400px;
+}
+
+@media (max-width: 400px) {
+    body {
+        min-width: 100%;
+    }
+}
