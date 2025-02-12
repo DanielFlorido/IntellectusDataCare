@@ -1,0 +1,4 @@
+@import '../../../shared/shared-styles/shared.styles.css';
+.component{
+    width: 300px;
+}
