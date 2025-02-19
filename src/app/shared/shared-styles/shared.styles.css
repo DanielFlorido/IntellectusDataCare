@@ -7,8 +7,6 @@ form {
   border-radius: 8px;
   margin: 20px auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: inherit;
-  max-width: 100%;
 }
 
 /* Estilos para los campos del formulario */
@@ -16,7 +14,6 @@ form {
 
 label {
   display: block;
-  min-width: fit-content;
   position: relative;
   font-weight: bold;
   color: #003366;
@@ -89,24 +86,27 @@ input[readonly] {
 }
 
 .container{
-  display: flex;
-  flex: auto;
-  flex-direction: row;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  align-items: start;
+  margin-bottom: 10px;
   justify-content: center;
   border: #003366;
   border-style: solid;
-  flex-wrap: wrap;
   width: 100%;
 }
 .component{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   margin: 10px;
   min-width: fit-content;
-  max-width: 49%;
+  width: 100%;
+  height: 100%;
+  border: red;
+  border-style: solid;
 }
 .pregunta{
   display: flex;
