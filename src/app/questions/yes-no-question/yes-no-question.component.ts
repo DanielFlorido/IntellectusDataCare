@@ -19,6 +19,7 @@ export class YesNoQuestionComponent implements OnInit {
   ngOnInit(): void {
     if(this.question){
       this.question.options= ['si', 'no']
+      this.question.optionsValue= [{label: 'si', value: 1}, {label: 'no', value: 0}]
     }
   }
 }
