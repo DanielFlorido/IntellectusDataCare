@@ -39,4 +39,13 @@
       order: -1;
     }
   }
+  .header-container {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff; /* Asegurar fondo visible */
+    z-index: 1000; /* Asegurar que quede sobre otros elementos */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  }
   

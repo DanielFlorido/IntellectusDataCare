@@ -1,0 +1,7 @@
+<nav class="indice" #indice>
+    <ul>
+        <li *ngFor="let sec of secciones" (click)="scrollToSection(sec.id)" [class.activo]="sec.id === seccionActiva">
+            <span *ngIf="sec.id === seccionActiva">➡️</span> {{ sec.titulo }}
+        </li>
+    </ul>
+</nav>

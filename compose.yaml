@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  angular-app:
+    build: .
+    container_name: angular_dev
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    user: "${MY_UID}:${MY_GID}"  # Corre el contenedor con tu usuario
+    environment:
+      - NG_CLI_ANALYTICS=ci  # Evita errores de permisos en Angular CLI
+    stdin_open: true
+    tty: true
