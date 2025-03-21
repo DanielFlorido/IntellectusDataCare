@@ -1,0 +1,20 @@
+{
+	"name": "Angular Dev Container",
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "angular-app",
+	"workspaceFolder": "/app",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "/bin/bash"
+			},
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode",
+				"angular.ng-template"
+			]
+		}
+	},
+	"postCreateCommand": "npm install",
+	"remoteUser": "node"
+}

@@ -1,4 +1,4 @@
-# 1. Imagen base con Node.js (Angular necesita Node.js)
+# 1. Imagen base con Node.js
 FROM node:18
 
 # 2. Establecer el directorio de trabajo dentro del contenedor
@@ -13,8 +13,11 @@ RUN npm install -g @angular/cli && npm install
 # 5. Copiar el resto del código fuente al contenedor
 COPY . .
 
-# 6. Exponer el puerto en el que Angular corre por defecto
+# 6. Asegurar permisos adecuados
+RUN mkdir -p /app/.angular/cache && chmod -R 777 /app/.angular
+
+# 7. Exponer el puerto en el que Angular corre por defecto
 EXPOSE 4200
 
-# 7. Comando por defecto para iniciar la aplicación en modo desarrollo
+# 8. Comando por defecto para iniciar la aplicación en modo desarrollo
 CMD ["npm", "run", "start"]
