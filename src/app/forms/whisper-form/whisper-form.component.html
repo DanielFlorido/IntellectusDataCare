@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="component">
+        <audio #player controls></audio>
+        <button (click)="transcribeAudio()">Transcribir Audio</button>
+    </div>
+    <div class="component">
+        <input type="file" (change)="loadAudio($event)" accept="audio/mpeg" />
+    </div>
+    <div class= "component">
+        <textarea class = "form" [(ngModel)]="transcription" rows="10" cols="60"></textarea>
+    </div>
+</div>
+

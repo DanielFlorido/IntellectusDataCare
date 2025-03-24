@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { WhisperFormComponent } from "../../forms/whisper-form/whisper-form.component";
 
 @Component({
-  selector: 'app-informe',
+  selector: 'app-whisper',
   standalone: true,
   imports: [WhisperFormComponent],
-  templateUrl: './informe.component.html',
-  styleUrl: './informe.component.css'
+  templateUrl: './whisper.component.html',
+  styleUrl: './whisper.component.css'
 })
-export class InformeComponent {
+export class WhisperComponent {
 
 }
