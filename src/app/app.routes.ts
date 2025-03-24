@@ -9,6 +9,7 @@ import { ConclusionesComponent } from './tabs/conclusiones/conclusiones.componen
 import { NoEncontradoComponent } from './errors/noEncontrado/no-encontrado/no-encontrado.component';
 import { HomeComponent } from './home/home.component';
 import { ListaPacientesComponent } from './tabs/lista-pacientes/lista-pacientes.component';
+import { WhisperComponent } from './tabs/whisper/whisper.component';
 
 export const routes: Routes = [
     {
@@ -50,5 +51,10 @@ export const routes: Routes = [
         path: '',
         component: ListaPacientesComponent,
         title: 'Pacientes'
+    },
+    {
+        path: 'whisper',
+        component: WhisperComponent,
+        title: 'Whisper'
     }
 ];
