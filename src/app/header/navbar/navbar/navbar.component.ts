@@ -17,6 +17,7 @@ export class NavbarComponent {
     { label: 'Neurologia',  icon : 'Ger', route: 'neurologia'},
     { label: 'Neuropsicologia', icon : 'Ger', route: 'neuropsicologia'},
     { label: 'Conclusiones Conjuntas', icon : 'Ger', route: 'conclusiones'},
+    { label: 'Whisper', icon : 'Ger', route: 'whisper'},
     { label: 'Informe', icon : 'Ger', route: 'informe'}
   ];
 }
