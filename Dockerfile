@@ -1,23 +1,20 @@
-# 1. Imagen base con Node.js
-FROM node:18
+# Etapa 1: Build Angular
+FROM node:20-alpine as build
 
-# 2. Establecer el directorio de trabajo dentro del contenedor
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build --prod
+
+# Etapa 2: Servir con http-server
+FROM node:20-alpine
+
+RUN npm install -g http-server
 WORKDIR /app
 
-# 3. Copiar los archivos de package.json y package-lock.json para instalar dependencias
-COPY package*.json ./
+COPY --from=build /app/dist/intellectus-data-care/browser/ /app
 
-# 4. Instalar Angular CLI globalmente y las dependencias del proyecto
-RUN npm install -g @angular/cli && npm install
-
-# 5. Copiar el resto del código fuente al contenedor
-COPY . .
-
-# 6. Asegurar permisos adecuados
-RUN mkdir -p /app/.angular/cache && chmod -R 777 /app/.angular
-
-# 7. Exponer el puerto en el que Angular corre por defecto
-EXPOSE 4200
-
-# 8. Comando por defecto para iniciar la aplicación en modo desarrollo
-CMD ["npm", "run", "start"]
+EXPOSE 80
+CMD ["http-server", ".", "-p", "80"]

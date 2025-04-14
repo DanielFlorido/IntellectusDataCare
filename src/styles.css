@@ -1,2 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('../src/app/shared/shared-styles/shared.styles.css');
+*{
+    font-family: Helvetica;
+}
+h2{
+    user-select: none;
+}
+label{
+    user-select: none;
+}
+li{
+    user-select: none;
+}

@@ -13,7 +13,7 @@ import { FormularioComponent } from "../../formulario/formulario.component";
 @Component({
   selector: 'app-indice-barthel',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, OptionsComponent, TextComponent, NumberComponent, DateComponent, YesNoQuestionComponent, OptionsValueComponent, FormularioComponent],
+  imports: [ReactiveFormsModule, CommonModule, FormularioComponent],
   templateUrl: './indice-barthel.component.html',
   styleUrl: './indice-barthel.component.css'
 })

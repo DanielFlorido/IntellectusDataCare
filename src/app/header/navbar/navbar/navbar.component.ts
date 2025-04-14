@@ -1,23 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import { CategoriaService } from '../../../shared/categoria/categoria-service/categoria.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
-  items = [
-    { label: 'Informacion General', icon : 'Ger', route: 'infogeneral'},
-    { label: 'Geriatria', icon : 'Ger', route: 'geriatria'},
-    { label: 'Psiquiatria', icon : 'Ger', route: 'psiquiatria'},
-    { label: 'Neurologia',  icon : 'Ger', route: 'neurologia'},
-    { label: 'Neuropsicologia', icon : 'Ger', route: 'neuropsicologia'},
-    { label: 'Conclusiones Conjuntas', icon : 'Ger', route: 'conclusiones'},
-    { label: 'Whisper', icon : 'Ger', route: 'whisper'},
-    { label: 'Informe', icon : 'Ger', route: 'informe'}
-  ];
+export class NavbarComponent implements OnInit{
+  ngOnInit(): void {
+    this.categoriaService.getItems().subscribe(data => {
+      this.items = data;
+    });
+  }
+  items! : any[];
+  private categoriaService = inject(CategoriaService);
 }

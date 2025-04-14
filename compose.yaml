@@ -1,14 +1,24 @@
+version: '3.8'
 
 services:
-  angular-app:
-    build: .
-    container_name: angular_dev
+  angular-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: angular-dev
     ports:
       - "4200:4200"
     volumes:
       - .:/app
       - /app/node_modules
     environment:
-      - NG_CLI_ANALYTICS=ci
-    stdin_open: true
-    tty: true
+      - CHOKIDAR_USEPOLLING=true
+    command: npm start
+
+  angular-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: angular-prod
+    ports:
+      - "80:80"

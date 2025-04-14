@@ -10,37 +10,44 @@ import { NoEncontradoComponent } from './errors/noEncontrado/no-encontrado/no-en
 import { HomeComponent } from './home/home.component';
 import { ListaPacientesComponent } from './tabs/lista-pacientes/lista-pacientes.component';
 import { WhisperComponent } from './tabs/whisper/whisper.component';
+import { CategoriaGeneralComponent } from './forms/categoria-general/categoria-general.component';
 
 export const routes: Routes = [
     {
         path: 'geriatria',
         component: GeriatriaComponent,
-        title: 'Geriatria'  
+        title: 'Geriatria',
+        children: [
+            {
+                path: ':id',
+                component: CategoriaGeneralComponent
+            }
+        ]
     },
     {
         path: 'neurologia',
         component: NeurologiaComponent,
-        title: 'Neurologia'  
+        title: 'Neurologia'
     },
     {
         path: 'neuropsicologia',
         component: NeuropsicologiaComponent,
-        title: 'Neuropsicologia'  
+        title: 'Neuropsicologia'
     },
     {
         path: 'psiquiatria',
         component: PsiquiatriaComponent,
-        title: 'Psiquiatria'  
+        title: 'Psiquiatria'
     },
     {
         path: 'informe',
         component: InformeComponent,
-        title: 'Informe'  
+        title: 'Informe'
     },
     {
         path: 'conclusiones',
         component: ConclusionesComponent,
-        title: 'Conclusiones'  
+        title: 'Conclusiones'
     },
     {
         path: 'infogeneral',
@@ -56,5 +63,11 @@ export const routes: Routes = [
         path: 'whisper',
         component: WhisperComponent,
         title: 'Whisper'
-    }
+    },
+    {
+        path: '**',
+        component: ListaPacientesComponent,
+        title: 'Pacientes'
+    },
+    { path: '**', redirectTo: 'Pacientes' }, 
 ];
