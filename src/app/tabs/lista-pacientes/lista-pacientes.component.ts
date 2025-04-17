@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { pacienteDto } from '../../interfaces/dtos/paciente-dto';
 import { Page } from '../../interfaces/page';
-import { PacienteService } from '../../shared/paciente.service';
+import { PacienteService } from '../../shared/paciente/paciente.service';
 import { CommonModule } from '@angular/common';
 
 @Component({

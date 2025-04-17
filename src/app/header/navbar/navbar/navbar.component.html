@@ -2,12 +2,12 @@
     <ul>
       <li *ngFor="let item of items" class="nav-item">
         <a
-          [routerLink]="[item.route]"
+          [routerLink]="[item.nombre]"
           routerLinkActive="activo"
           [routerLinkActiveOptions]="{ exact: false }"
           class="nav-link"
         >
-          {{ item.label }}
+          {{ item.nombre }}
         </a>
       </li>
     </ul>

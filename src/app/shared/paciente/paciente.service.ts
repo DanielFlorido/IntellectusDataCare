@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { pacienteDto } from '../interfaces/dtos/paciente-dto';
+import { pacienteDto } from '../../interfaces/dtos/paciente-dto';
 import { Observable, of } from 'rxjs';
-import { Page } from '../interfaces/page';
+import { Page } from '../../interfaces/page';
 
 @Injectable({
     providedIn: 'root'

@@ -40,7 +40,7 @@ export const routes: Routes = [
         title: 'Psiquiatria'
     },
     {
-        path: 'informe',
+        path: 'Informe',
         component: InformeComponent,
         title: 'Informe'
     },
