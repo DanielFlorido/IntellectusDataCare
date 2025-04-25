@@ -29,6 +29,7 @@ export class FormularioComponent {
   ngOnInit() {
     this.form = this.fb.group(
       this.questions.reduce((group: { [key: string]: any }, question) => {
+        console.log('Agregando control:', question.idPregunta);
         group[question.idPregunta] = ['', question.validators || []];
         return group;
       }, {})
