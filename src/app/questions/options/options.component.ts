@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Question } from '../../interfaces/question';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { preguntaDto } from '../../interfaces/dtos/pregunta-dto';
 
 @Component({
   selector: 'app-options',
@@ -12,7 +13,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class OptionsComponent {
   @Input('question')
-  question!:Question;
+  question!:preguntaDto;
   @Input('control')
   control!:FormControl;
 }

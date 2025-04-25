@@ -1,9 +1,12 @@
+import { categoriaDto } from '../../interfaces/dtos/categoria-dto';
+import { preguntaDto } from '../../interfaces/dtos/pregunta-dto';
 import { PreguntasService } from './../../shared/categoria/preguntas-service/preguntas.service';
-import { categoriaDto } from './../../interfaces/dtos/categoria-dto';
+
 import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormularioComponent } from '../formulario/formulario.component';
 import { ActivatedRoute } from '@angular/router';
+import { CategoriaService } from '../../shared/categoria/categoria-service/categoria.service';
 
 @Component({
   selector: 'app-categoria-general',
@@ -18,13 +21,16 @@ export class CategoriaGeneralComponent implements OnInit{
     if (!isNaN(id)) {
       this.loadPreguntas(id);
     }
+    this.categoriaActual = this.categoriaService.getCategoriaActual();
   }
   private route = inject(ActivatedRoute);
   private preguntasService = inject(PreguntasService);
-  categoriaDto!: categoriaDto;
+  private categoriaService = inject(CategoriaService);
+  preguntaDto!: preguntaDto[];
+  categoriaActual!: categoriaDto;
   loadPreguntas(id: number) {
     this.preguntasService.getPreguntas(id).subscribe(data => {
-      this.categoriaDto = data;
+      this.preguntaDto = data;
     });
   }
   handleFormSubmit(data: FormGroup) {

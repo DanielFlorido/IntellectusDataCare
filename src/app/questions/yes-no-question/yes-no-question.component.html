@@ -1,7 +1,7 @@
 <div class="pregunta" >
-    <label>{{question.label}}</label>
+    <label>{{question.textoPregunta}}</label>
     <select [formControl] = "control">   
-        <option *ngFor="let option of question.options" [value]="option">
+        <option *ngFor="let option of question.opciones" [value]="option">
             {{ option }}
         </option>        
     </select>

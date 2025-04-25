@@ -1,8 +1,8 @@
 <nav class="indice" #indice>
     <ul>
-        <li *ngFor="let sec of categorias" (click)="navegarACategoria(sec.id)"
+        <li *ngFor="let sec of categorias" (click)="navegarACategoria(sec)"
             [class.activo]="sec.id.toString() === seccionActiva">
-            <span *ngIf="sec.id">➡️</span> {{ sec.label }}
+            <span *ngIf="sec.id">➡️</span> {{ sec.nombre }}
         </li>
     </ul>
 </nav>

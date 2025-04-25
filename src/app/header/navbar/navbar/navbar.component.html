@@ -1,15 +1,14 @@
 <nav>
-    <ul>
-      <li *ngFor="let item of items" class="nav-item">
-        <a
-          [routerLink]="[item.nombre]"
-          routerLinkActive="activo"
-          [routerLinkActiveOptions]="{ exact: false }"
-          class="nav-link"
-        >
-          {{ item.nombre }}
-        </a>
-      </li>
-    </ul>
-  </nav>
-  
+  <ul>
+    <li *ngFor="let item of items" class="nav-item">
+      <a
+        class="nav-link"
+        [class.activo]="isActive(item.nombre)"
+        (click)="navegarAArea(item)"
+        href="javascript:void(0)"
+      >
+        {{ item.nombre }}
+      </a>
+    </li>
+  </ul>
+</nav>

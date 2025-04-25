@@ -1,30 +1,49 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { categoriasDto } from '../../../interfaces/dtos/categorias-dto';
+import { AreaService } from './../../area/area.service';
+import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { categoriaDto } from '../../../interfaces/dtos/categoria-dto';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../env/enviroment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriaService {
-  private categorias1: categoriasDto[] = [
-    { id: 1, label: 'Preguntas' },
-    { id: 2, label: 'Índice Barthel' },
-    { id: 3, label: 'Actividad Pfeffer' },
-    { id: 4, label: 'QSM-F' },
-    { id: 5, label: 'STOP-BANG' },
-    { id: 6, label: 'FES-I' },
-    { id: 7, label: 'MNA-SF' },
-    { id: 8, label: 'Valoración Social' },
-  ];
-  
-  constructor() { }
-  getCategorias(id: number): Observable<categoriasDto[]> {
-    switch (id) {
-      case 1:
-        return of(this.categorias1);
-      default:
-        return of(this.categorias1);
+  private baseurl = environment.apiUrl;
+  private http: HttpClient = inject(HttpClient);
+  private areaService = inject(AreaService);
+
+  private categoriasMap = new Map<number, categoriaDto[]>();
+  private categoriaSubjectsMap = new Map<number, BehaviorSubject<categoriaDto[]>>();
+
+  private categoriaActual!: categoriaDto;
+
+  constructor() {}
+
+  getCategorias(): Observable<categoriaDto[]> {
+    const areaId = this.areaService.getAreaActual().id;
+
+    
+    if (this.categoriasMap.has(areaId)) {
+      return this.categoriaSubjectsMap.get(areaId)!.asObservable();
     }
+
+    const newSubject = new BehaviorSubject<categoriaDto[]>([]);
+    this.categoriaSubjectsMap.set(areaId, newSubject);
+
+    this.http.get<categoriaDto[]>(`${this.baseurl}/categoria/${areaId}`).subscribe((data) => {
+      this.categoriasMap.set(areaId, data);
+      newSubject.next(data);
+    });
+
+    return newSubject.asObservable();
   }
-  
+
+  getCategoriaActual() {
+    return this.categoriaActual;
+  }
+
+  setCategoriaActual(categoria: categoriaDto) {
+    this.categoriaActual = categoria;
+  }
 }

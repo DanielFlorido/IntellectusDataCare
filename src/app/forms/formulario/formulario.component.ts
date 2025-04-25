@@ -8,6 +8,7 @@ import { NumberComponent } from "../../questions/number/number.component";
 import { DateComponent } from "../../questions/date/date.component";
 import { YesNoQuestionComponent } from "../../questions/yes-no-question/yes-no-question.component";
 import { OptionsValueComponent } from "../../questions/options-value/options-value.component";
+import { preguntaDto } from '../../interfaces/dtos/pregunta-dto';
 
 @Component({
   selector: 'app-formulario',
@@ -18,7 +19,7 @@ import { OptionsValueComponent } from "../../questions/options-value/options-val
 })
 export class FormularioComponent {
   @Input({required: true, alias:'questions'})
-  questions!: Question[];
+  questions!: preguntaDto[];
   @Input({required: true, alias: 'onSubmitHandler'}) onSubmitHandler!: (formValue: any) => void; 
 
   form!: FormGroup;
@@ -28,7 +29,7 @@ export class FormularioComponent {
   ngOnInit() {
     this.form = this.fb.group(
       this.questions.reduce((group: { [key: string]: any }, question) => {
-        group[question.id] = ['', question.validators || []];
+        group[question.idPregunta] = ['', question.validators || []];
         return group;
       }, {})
     );
