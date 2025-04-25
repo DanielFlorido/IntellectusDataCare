@@ -10,21 +10,32 @@ import { preguntaDto } from '../../../interfaces/dtos/pregunta-dto';
   providedIn: 'root'
 })
 export class PreguntasService {
-
-  constructor() { }
   private baseurl = environment.apiUrl;
   private http: HttpClient = inject(HttpClient);
-  private preguntasSubject = new BehaviorSubject<preguntaDto[]>([]);
-  preguntas : preguntaDto[] = [];
+
+  // Mapa para cachear preguntas por categoría
+  private preguntasMap = new Map<number, preguntaDto[]>();
+  private preguntasSubjectMap = new Map<number, BehaviorSubject<preguntaDto[]>>();
+
+  constructor() {}
 
   getPreguntas(idCategoria: number): Observable<preguntaDto[]> {
-    if (this.preguntas.length === 0) {
-      this.http.get<preguntaDto[]>(`${this.baseurl}/pregunta/${idCategoria}`).subscribe((data) => {
-        this.preguntas = data;
-        this.preguntasSubject.next(data);
-      });
+    // Si ya tenemos preguntas para esta categoría, devolvemos su observable
+    if (this.preguntasMap.has(idCategoria)) {
+      return this.preguntasSubjectMap.get(idCategoria)!.asObservable();
     }
-    return this.preguntasSubject.asObservable();
+
+    // Creamos un nuevo Subject vacío mientras llegan los datos
+    const newSubject = new BehaviorSubject<preguntaDto[]>([]);
+    this.preguntasSubjectMap.set(idCategoria, newSubject);
+
+    // Pedimos al servidor y guardamos en cache
+    this.http.get<preguntaDto[]>(`${this.baseurl}/pregunta/${idCategoria}`).subscribe((data) => {
+      this.preguntasMap.set(idCategoria, data);
+      newSubject.next(data);
+    });
+
+    return newSubject.asObservable();
   }
 }
 

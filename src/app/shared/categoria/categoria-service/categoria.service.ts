@@ -16,7 +16,11 @@ export class CategoriaService {
   private categoriasMap = new Map<number, categoriaDto[]>();
   private categoriaSubjectsMap = new Map<number, BehaviorSubject<categoriaDto[]>>();
 
-  private categoriaActual!: categoriaDto;
+  private categoriaActual: categoriaDto= {
+    id: 1,
+    nombre: 'Categoria 1',
+    tipoResultado: 'Tipo 1'
+  };
 
   constructor() {}
 

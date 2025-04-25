@@ -1,7 +1,7 @@
+import { categoriaDto } from './../../interfaces/dtos/categoria-dto';
 import { CategoriaService } from './../../shared/categoria/categoria-service/categoria.service';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, inject, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { categoriaDto } from '../../interfaces/dtos/categoria-dto';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
 import id from '@angular/common/locales/id';
@@ -19,7 +19,7 @@ export class IndiceNavegacionComponent implements OnInit {
   @ViewChild('indice') indice!: ElementRef;
 
   seccionActiva: string = '';
-  private CategoriaService = inject(CategoriaService);
+  private categoriaService = inject(CategoriaService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
@@ -35,14 +35,12 @@ export class IndiceNavegacionComponent implements OnInit {
     this.getCategorias();
   }
   getCategorias() {
-    this.CategoriaService.getCategorias().subscribe(data => {
+    this.categoriaService.getCategorias().subscribe(data => {
       this.categorias = data;
-      console.log(data);
-      
     });
   }
   navegarACategoria(categoria: categoriaDto) {
-    this.CategoriaService.setCategoriaActual(categoria);
+    this.categoriaService.setCategoriaActual(categoria); 
     this.router.navigate([categoria.id], { relativeTo: this.route });
   }
 }
