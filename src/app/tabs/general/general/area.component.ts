@@ -4,11 +4,13 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { CategoriaService } from '../../../shared/categoria/categoria-service/categoria.service';
 import { categoriaDto } from '../../../interfaces/dtos/categoria-dto';
 import { IndiceNavegacionComponent } from "../../../indice/indice-navegacion/indice-navegacion.component";
+import { area } from '../../../interfaces/dtos/area-dto';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-general',
+  selector: 'app-area',
   standalone: true,
-  imports: [RouterOutlet, IndiceNavegacionComponent],
+  imports: [RouterOutlet, IndiceNavegacionComponent, CommonModule],
   templateUrl: './area.component.html',
   styleUrl: './area.component.css'
 })
@@ -18,12 +20,14 @@ export class AreaComponent implements OnInit {
   private router = inject(Router);
   private areaService = inject(AreaService);
   private route = inject(ActivatedRoute);
+  areaActual!: area;
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const areaNombre = params.get('areaNombre');
       if (areaNombre) {
-        const area = this.areaService.getAreaByNombre(areaNombre);        
+        const area = this.areaService.getAreaByNombre(areaNombre);
         if (area) {
+          this.areaActual = area;
           this.areaService.setAreaActual(area);
           this.loadCategorias();
         }

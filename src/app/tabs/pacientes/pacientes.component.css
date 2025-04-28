@@ -1,0 +1,39 @@
+.lista-pacientes-container {
+    padding: 20px;
+}
+
+button {
+    margin-bottom: 20px;
+    background-color: #0033a0;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #002080;
+}
+
+.paciente-lista {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.paciente-item {
+    border-bottom: 1px solid #ddd;
+}
+
+.paciente-header {
+    background-color: #f9f9f9;
+    padding: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.paciente-detalle {
+    padding: 10px;
+    background-color: #f1f1f1;
+}

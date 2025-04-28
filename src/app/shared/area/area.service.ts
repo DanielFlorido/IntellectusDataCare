@@ -27,10 +27,7 @@ export class AreaService {
   getAreaByNombre(nombre: string): area | undefined {
     return this.areas.find((a) => a.nombre === nombre);
   }  
-  private areaActual: area={
-    id: 1,
-    nombre: "",
-  }
+  private areaActual!: area;
 
   setAreaActual(area: area)  {
     this.areaActual = area;

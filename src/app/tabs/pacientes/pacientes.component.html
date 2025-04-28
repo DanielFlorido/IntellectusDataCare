@@ -1,0 +1,17 @@
+<div class="lista-pacientes-container">
+    <button (click)="irACrearPaciente()">➕ Crear Paciente</button>
+  
+    <div class="paciente-lista">
+      <div *ngFor="let paciente of pacientes" class="paciente-item">
+        <div class="paciente-header" (click)="seleccionarPaciente(paciente.id)">
+          {{ paciente.nombre }} ({{ paciente.cedula }})
+        </div>
+  
+        <div *ngIf="pacienteSeleccionadoId === paciente.id" class="paciente-detalle">
+          <!-- Futuro componente aquí -->
+          <p>Detalles del paciente (por implementar)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

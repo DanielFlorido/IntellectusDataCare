@@ -1,4 +1,6 @@
-<app-indice-navegacion></app-indice-navegacion>
+<div *ngIf="areaActual">
+    <app-indice-navegacion></app-indice-navegacion>
+</div>
 <div class="container">
     <router-outlet></router-outlet>
 </div>
