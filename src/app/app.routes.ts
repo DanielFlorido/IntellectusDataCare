@@ -3,6 +3,7 @@ import { CategoriaGeneralComponent } from './forms/categoria-general/categoria-g
 import { AreaComponent } from './tabs/general/general/area.component';
 import { PacientesComponent } from './tabs/pacientes/pacientes.component';
 import { CrearPacienteComponent } from './tabs/pacientes/crearPaciente/crear-paciente/crear-paciente.component';
+import { CrearConsultaComponent } from './tabs/general/crearConsulta/crear-consulta/crear-consulta.component';
 
 export const routes: Routes = [
     {
@@ -15,14 +16,28 @@ export const routes: Routes = [
         title: 'Crear Paciente'
     },
     {
-        path: ':areaNombre', // Ruta para el área
-        component: AreaComponent, // El componente que carga las categorías
+        path: 'consulta',
+        component: CrearConsultaComponent,
         children: [
             {
-                path: ':id', // Ruta para la categoría específica
-                component: CategoriaGeneralComponent, // El componente que muestra la categoría
+                path: ':areaNombre',
+                component: AreaComponent,
+                children: [
+                    {
+                        path: ':idCategoria',
+                        component: CategoriaGeneralComponent,
+                    }
+                ]
             }
         ]
+    },      
+    {
+        path: '',
+        redirectTo: 'pacientes',
+        pathMatch: 'full'
     },
-    { path: '**', redirectTo: '/pacientes', pathMatch: 'full' },
+    {
+        path: '**',
+        redirectTo: 'pacientes'
+    }
 ];

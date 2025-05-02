@@ -20,7 +20,10 @@ export class AreaComponent implements OnInit {
   private router = inject(Router);
   private areaService = inject(AreaService);
   private route = inject(ActivatedRoute);
-  areaActual!: area;
+  areaActual: area= {
+    id: 1,
+    nombre: 'Area'
+  };
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const areaNombre = params.get('areaNombre');

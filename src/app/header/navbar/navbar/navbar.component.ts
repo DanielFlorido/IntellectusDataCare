@@ -1,8 +1,11 @@
+import { PacienteService } from './../../../shared/paciente/paciente.service';
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { AreaService } from '../../../shared/area/area.service';
 import { area } from '../../../interfaces/dtos/area-dto';
+import { PacienteListadoDto } from '../../../interfaces/dtos/paciente-listado-dto';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -15,14 +18,18 @@ export class NavbarComponent implements OnInit {
   isActive(ruta: string) {
     return this.router.url.includes(ruta);
   }
+  private pacienteService = inject(PacienteService);
+  pacienteActual$!: Observable<PacienteListadoDto>;
+
   navegarAArea(item: area) {
     this.areaService.setAreaActual(item); 
-    this.router.navigate(['/',item.nombre]); 
+    this.router.navigate(['/consulta',item.nombre]); 
   }
   ngOnInit(): void {
     this.areaService.getAreas().subscribe(data => {
       this.items = data;
     });
+    this.pacienteActual$ = this.pacienteService.getPacienteActual();
   }
   items!: area[];
   private areaService = inject(AreaService);

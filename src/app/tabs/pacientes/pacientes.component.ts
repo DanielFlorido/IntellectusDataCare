@@ -4,12 +4,14 @@ import { PacienteService } from '../../shared/paciente/paciente.service';
 import { PacienteListadoDto } from '../../interfaces/dtos/paciente-listado-dto';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ConsultaPacientesComponent } from "./consultaPacientes/consulta-pacientes/consulta-pacientes.component";
+import { pacienteDto } from '../../interfaces/dtos/paciente-dto';
 
 
 @Component({
   selector: 'app-pacientes',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ConsultaPacientesComponent],
   templateUrl: './pacientes.component.html',
   styleUrl: './pacientes.component.css'
 })
@@ -35,7 +37,8 @@ export class PacientesComponent implements OnInit {
     this.router.navigate(['/crear-paciente']);
   }
 
-  seleccionarPaciente(id: number) {
-    this.pacienteSeleccionadoId = id === this.pacienteSeleccionadoId ? null : id;
+  seleccionarPaciente(paciente: PacienteListadoDto) {
+    this.pacienteService.setPacienteActual(paciente);
+    this.pacienteSeleccionadoId = paciente.id === this.pacienteSeleccionadoId ? null : paciente.id;
   }
 }

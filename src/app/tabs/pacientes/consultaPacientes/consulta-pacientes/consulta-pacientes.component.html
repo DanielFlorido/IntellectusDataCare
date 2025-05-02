@@ -1,0 +1,15 @@
+<div class="acciones-consulta">
+    <button (click)="irACrearConsulta()">➕ Crear Consulta</button>
+  </div>
+  
+<div *ngIf="consultas.length; else noConsultas">
+    <ul>
+        <li *ngFor="let consulta of consultas">
+            Consulta ID: {{ consulta.id }} - Fecha: {{ consulta.fecha | date:'longDate' }}
+        </li>
+    </ul>
+</div>
+
+<ng-template #noConsultas>
+    <p>No hay consultas registradas para este paciente.</p>
+</ng-template>
