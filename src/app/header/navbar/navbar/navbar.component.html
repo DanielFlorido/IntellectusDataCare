@@ -1,4 +1,4 @@
-<nav>
+<nav *ngIf="pacienteActual$ | async as pacienteActual">
   <ul >
     <li *ngFor="let item of items" class="nav-item">
       <a

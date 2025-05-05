@@ -15,23 +15,25 @@ import { Observable } from 'rxjs';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
-  isActive(ruta: string) {
-    return this.router.url.includes(ruta);
-  }
-  private pacienteService = inject(PacienteService);
-  pacienteActual$!: Observable<PacienteListadoDto>;
+  
+  pacienteActual$!: Observable<PacienteListadoDto | null>;
+  items: area[] = [];
 
-  navegarAArea(item: area) {
-    this.areaService.setAreaActual(item); 
-    this.router.navigate(['/consulta',item.nombre]); 
-  }
-  ngOnInit(): void {
-    this.areaService.getAreas().subscribe(data => {
-      this.items = data;
-    });
-    this.pacienteActual$ = this.pacienteService.getPacienteActual();
-  }
-  items!: area[];
+  private pacienteService = inject(PacienteService);
   private areaService = inject(AreaService);
   private router = inject(Router);
+
+  ngOnInit(): void {
+    this.areaService.getAreas().subscribe(data => this.items = data);
+    this.pacienteActual$ = this.pacienteService.getPacienteActual(); // Reactivo
+  }
+
+  navegarAArea(item: area) {
+    this.areaService.setAreaActual(item);
+    this.router.navigate(['/consulta', item.nombre]);
+  }
+
+  isActive(ruta: string): boolean {
+    return this.router.url.includes(ruta);
+  }
 }

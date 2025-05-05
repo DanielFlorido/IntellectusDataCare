@@ -12,37 +12,56 @@ import { pacienteDto } from '../../interfaces/dtos/paciente-dto';
 })
 export class PacienteService {
 
-    constructor() { };
     private baseurl = environment.apiUrl;
-    private http: HttpClient = inject(HttpClient);
+    private http = inject(HttpClient);
 
     private pacientesSubject = new BehaviorSubject<PacienteListadoDto[]>([]);
-    private pacientes: PacienteListadoDto[]=[];
+    private pacientes: PacienteListadoDto[] = [];
 
-    private pacienteActual!: PacienteListadoDto;
+    private pacienteActualKey = 'paciente-actual';
 
-    getPacientes(): Observable<PacienteListadoDto[]> {       
-        if(this.pacientes.length === 0) {
-            this.http.get<PacienteListadoDto[]>(`${this.baseurl}/pacientes`).subscribe((data) => {
+    private pacienteActualSubject = new BehaviorSubject<PacienteListadoDto | null>(
+        this.obtenerPacienteDeStorage()
+    );
+    constructor() {  }
+
+    getPacientes(): Observable<PacienteListadoDto[]> {
+        if (this.pacientes.length === 0) {
+            this.http.get<PacienteListadoDto[]>(`${this.baseurl}/pacientes`).subscribe(data => {
                 this.pacientes = data;
                 this.pacientesSubject.next(data);
             });
         }
         return this.pacientesSubject.asObservable();
     }
+
     crearPaciente(dto: pacienteDto): Observable<any> {
-        this.http.get<PacienteListadoDto[]>(`${this.baseurl}/pacientes`).subscribe((data) => {
-            this.pacientes = data;
-            this.pacientesSubject.next(data);
-        });
-      return this.http.post(`${this.baseurl}/CrearPaciente`, dto);
+        return this.http.post(`${this.baseurl}/CrearPaciente`, dto);
     }
-    getPacienteActual() :Observable<PacienteListadoDto> {
-        return of(this.pacienteActual);
+
+    getPacienteActual(): Observable<PacienteListadoDto | null> {
+        return this.pacienteActualSubject.asObservable();
     }
+
+    getPacienteActualSync(): PacienteListadoDto | null {
+        return this.pacienteActualSubject.value;
+    }
+
     setPacienteActual(paciente: PacienteListadoDto) {
-        this.pacienteActual = paciente;
-        console.log('Paciente actual:', paciente);
-        
-    }  
+        localStorage.setItem('pacienteActual', JSON.stringify(paciente));
+        this.pacienteActualSubject.next(paciente);
+    }
+
+    limpiarPacienteActual() {
+        localStorage.removeItem(this.pacienteActualKey);
+    }
+
+    tienePacienteSeleccionado(): boolean {
+        return !!this.pacienteActualSubject.value;
+    }
+
+    private obtenerPacienteDeStorage(): PacienteListadoDto | null {
+        const data = localStorage.getItem('pacienteActual');
+        return data ? JSON.parse(data) : null;
+    }
 }
