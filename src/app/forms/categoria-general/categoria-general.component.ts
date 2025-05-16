@@ -20,9 +20,11 @@ import { CommonModule } from '@angular/common';
 export class CategoriaGeneralComponent implements OnInit{
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const idParam = params['id'];
+      const idParam = params['idCategoria'];      
+      console.log('ayudaaa',idParam);
       if (idParam) {
         const id = Number(idParam);
+        console.log('ayudaaa', id);
         
         // Obtenemos el nuevo valor después del cambio de ruta
         this.categoriaActual = this.categoriaService.getCategoriaActual();

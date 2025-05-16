@@ -5,6 +5,7 @@ import { Question } from '../../../interfaces/question';
 import { environment } from '../../../../env/enviroment';
 import { HttpClient } from '@angular/common/http';
 import { preguntaDto } from '../../../interfaces/dtos/pregunta-dto';
+import { ConsultaService } from '../../consulta/consulta.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class PreguntasService {
 
   // Mapa para cachear preguntas por categoría
   private preguntasMap = new Map<number, preguntaDto[]>();
-  private preguntasSubjectMap = new Map<number, BehaviorSubject<preguntaDto[]>>();
-
+  private preguntasSubjectMap = new Map<number, BehaviorSubject<preguntaDto[]>>();  
+  private consultaService = inject(ConsultaService);
   constructor() {}
 
   getPreguntas(idCategoria: number): Observable<preguntaDto[]> {
@@ -24,13 +25,15 @@ export class PreguntasService {
     if (this.preguntasMap.has(idCategoria)) {
       return this.preguntasSubjectMap.get(idCategoria)!.asObservable();
     }
+    const consulta = this.consultaService.getConsultaActualSync();
+    const consultaId = consulta?.id ?? null;
 
     // Creamos un nuevo Subject vacío mientras llegan los datos
     const newSubject = new BehaviorSubject<preguntaDto[]>([]);
     this.preguntasSubjectMap.set(idCategoria, newSubject);
-
+    
     // Pedimos al servidor y guardamos en cache
-    this.http.get<preguntaDto[]>(`${this.baseurl}/pregunta/${idCategoria}`).subscribe((data) => {
+    this.http.get<preguntaDto[]>(`${this.baseurl}/pregunta/${idCategoria}/${consultaId}`).subscribe((data) => {
       this.preguntasMap.set(idCategoria, data);
       newSubject.next(data);
     });

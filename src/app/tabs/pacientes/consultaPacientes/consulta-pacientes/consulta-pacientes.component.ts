@@ -45,4 +45,13 @@ export class ConsultaPacientesComponent {
       }
     });
   }
+  seleccionarConsulta(consulta: ConsultaDto) {
+    if (!this.paciente) {
+      console.error('Paciente no definido');
+      return;
+    }
+    this.pacienteService.setPacienteActual(this.paciente);
+    this.consultaService.setConsultaActual(consulta);
+    this.router.navigate(['/consulta']);
+  }
 }

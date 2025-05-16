@@ -6,11 +6,12 @@ import { categoriaDto } from '../../../interfaces/dtos/categoria-dto';
 import { IndiceNavegacionComponent } from "../../../indice/indice-navegacion/indice-navegacion.component";
 import { area } from '../../../interfaces/dtos/area-dto';
 import { CommonModule } from '@angular/common';
+import { CategoriaGeneralComponent } from '../../../forms/categoria-general/categoria-general.component';
 
 @Component({
   selector: 'app-area',
   standalone: true,
-  imports: [RouterOutlet, IndiceNavegacionComponent, CommonModule],
+  imports: [RouterOutlet, IndiceNavegacionComponent, CommonModule, CategoriaGeneralComponent],
   templateUrl: './area.component.html',
   styleUrl: './area.component.css'
 })

@@ -4,7 +4,7 @@
   
 <div *ngIf="consultas.length; else noConsultas">
     <ul>
-        <li *ngFor="let consulta of consultas">
+        <li *ngFor="let consulta of consultas" (click)="seleccionarConsulta(consulta)" class="consulta-item">
             Consulta ID: {{ consulta.id }} - Fecha: {{ consulta.fecha | date:'longDate' }}
         </li>
     </ul>

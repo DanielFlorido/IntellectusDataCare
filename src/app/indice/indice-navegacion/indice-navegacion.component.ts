@@ -40,7 +40,12 @@ export class IndiceNavegacionComponent implements OnInit {
     });
   }
   navegarACategoria(categoria: categoriaDto) {
-    this.categoriaService.setCategoriaActual(categoria); 
-    this.router.navigate([categoria.id], { relativeTo: this.route });
+  this.categoriaService.setCategoriaActual(categoria);
+
+  const areaNombre = this.route.snapshot.paramMap.get('areaNombre');
+  if (areaNombre) {
+    this.router.navigate(['/consulta', areaNombre, categoria.id]);
   }
+}
+
 }
