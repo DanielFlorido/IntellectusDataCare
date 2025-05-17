@@ -4,6 +4,7 @@ import { AreaComponent } from './tabs/general/general/area.component';
 import { PacientesComponent } from './tabs/pacientes/pacientes.component';
 import { CrearPacienteComponent } from './tabs/pacientes/crearPaciente/crear-paciente/crear-paciente.component';
 import { CrearConsultaComponent } from './tabs/general/crearConsulta/crear-consulta/crear-consulta.component';
+import { ConsultaLayoutComponent } from './layout/consulta-layout/consulta-layout.component';
 
 export const routes: Routes = [
     {
@@ -15,22 +16,26 @@ export const routes: Routes = [
         component: CrearPacienteComponent,
         title: 'Crear Paciente'
     },
-    {
-        path: 'consulta',
-        component: CrearConsultaComponent,
+    {    
+    path: 'consulta',
+    component: ConsultaLayoutComponent, // 🔁 nuevo Layout Component
+    children: [
+        {
+        path: '',
+        component: CrearConsultaComponent // navbar + selección inicial
+        },
+        {
+        path: ':areaNombre',
+        component: AreaComponent,
         children: [
             {
-                path: ':areaNombre',
-                component: AreaComponent,
-                children: [
-                    {
-                        path: ':idCategoria',
-                        component: CategoriaGeneralComponent,
-                    }
-                ]
+            path: ':idCategoria',
+            component: CategoriaGeneralComponent
             }
         ]
-    },      
+        }
+    ]
+    },
     {
         path: '',
         redirectTo: 'pacientes',
