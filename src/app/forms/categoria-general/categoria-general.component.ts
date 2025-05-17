@@ -1,13 +1,9 @@
 import { categoriaDto } from '../../interfaces/dtos/categoria-dto';
-import { preguntaDto } from '../../interfaces/dtos/pregunta-dto';
-import { PreguntasService } from './../../shared/categoria/preguntas-service/preguntas.service';
-
 import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormularioComponent } from '../formulario/formulario.component';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { CategoriaService } from '../../shared/categoria/categoria-service/categoria.service';
-import { filter } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -18,36 +14,24 @@ import { CommonModule } from '@angular/common';
   styleUrl: './categoria-general.component.css'
 })
 export class CategoriaGeneralComponent implements OnInit{
+  private route = inject(ActivatedRoute);
+  private categoriaService = inject(CategoriaService);
+
+  categoriaActual!: categoriaDto;
+  idCategoria!: number;
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const idParam = params['idCategoria'];      
-      console.log('ayudaaa',idParam);
+      const idParam = params['idCategoria'];
       if (idParam) {
-        const id = Number(idParam);
-        console.log('ayudaaa', id);
-        
-        // Obtenemos el nuevo valor después del cambio de ruta
+        this.idCategoria = Number(idParam);
         this.categoriaActual = this.categoriaService.getCategoriaActual();
-        console.log("Categoria actual:", this.categoriaActual);
-  
-        this.loadPreguntas(id);
+        console.log("Categoría actual:", this.categoriaActual);
       }
     });
-  }  
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
-  private preguntasService = inject(PreguntasService);
-  private categoriaService = inject(CategoriaService);
-  preguntaDto!: preguntaDto[];
-  categoriaActual!: categoriaDto;
-  loadPreguntas(id: number) {
-    this.preguntasService.getPreguntas(id).subscribe(data => {
-      this.preguntaDto = data;
-      console.log("Preguntas cargadas:", this.preguntaDto);
-
-    });
   }
-  handleFormSubmit(data: FormGroup) {
-      console.log("Formulario enviado con datos:",  data.value);
+
+  handleFormSubmit(form: FormGroup): void {
+    console.log("Formulario enviado con datos:", form.value);
   }
 }

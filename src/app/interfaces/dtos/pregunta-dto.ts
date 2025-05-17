@@ -1,7 +1,7 @@
 import { ValidatorFn } from '@angular/forms';
 import { Question } from '../question';
 export interface preguntaDto{
-    idPregunta: number,
+    id: number,
     textoPregunta: string,
     tipoRespuesta: string,
     idCategoria: number,

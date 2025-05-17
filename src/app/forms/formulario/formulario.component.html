@@ -1,11 +1,11 @@
 <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div *ngFor="let question of questions">
-        <app-options *ngIf="question.tipoRespuesta==='Desplegable'" [question]="question" [control]="getControl(question.idPregunta.toString())"></app-options>
-        <app-text *ngIf="question.tipoRespuesta==='Texto'" [question]="question" [control]="getControl(question.idPregunta.toString())"></app-text>
-        <app-number *ngIf="question.tipoRespuesta==='Numero'" [question]="question" [control]="getControl(question.idPregunta.toString())"></app-number>
-        <app-date *ngIf="question.tipoRespuesta==='date'" [question]="question" [control]="getControl(question.idPregunta.toString())"></app-date>
-        <app-yes-no-question *ngIf="question.tipoRespuesta==='Bool'" [question]="question" [control]="getControl(question.idPregunta.toString())"></app-yes-no-question>
-        <app-options-value *ngIf="question.tipoRespuesta=== 'selectValue'" [question]="question" [control]="getControl(question.idPregunta.toString())"></app-options-value>
-    </div>  
-    <button type="submit">Enviar</button>
-</form> 
+  <div *ngFor="let question of preguntas">
+    <app-options *ngIf="question.tipoRespuesta === 'Desplegable'" [question]="question" [control]="getControl(question.id.toString())"></app-options>
+    <app-text *ngIf="question.tipoRespuesta === 'Texto'" [question]="question" [control]="getControl(question.id.toString())"></app-text>
+    <app-number *ngIf="question.tipoRespuesta === 'Numero'" [question]="question" [control]="getControl(question.id.toString())"></app-number>
+    <app-date *ngIf="question.tipoRespuesta === 'date'" [question]="question" [control]="getControl(question.id.toString())"></app-date>
+    <app-yes-no-question *ngIf="question.tipoRespuesta === 'Bool'" [question]="question" [control]="getControl(question.id.toString())"></app-yes-no-question>
+    <app-options-value *ngIf="question.tipoRespuesta === 'selectValue'" [question]="question" [control]="getControl(question.id.toString())"></app-options-value>
+  </div>
+  <button type="submit">Enviar</button>
+</form>

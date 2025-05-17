@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, EventEmitter,Output, SimpleChanges, inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Question } from '../../interfaces/question';
 import { CommonModule } from '@angular/common';
 import { OptionsComponent } from "../../questions/options/options.component";
 import { TextComponent } from "../../questions/text/text.component";
@@ -9,6 +8,8 @@ import { DateComponent } from "../../questions/date/date.component";
 import { YesNoQuestionComponent } from "../../questions/yes-no-question/yes-no-question.component";
 import { OptionsValueComponent } from "../../questions/options-value/options-value.component";
 import { preguntaDto } from '../../interfaces/dtos/pregunta-dto';
+import { PreguntasService } from '../../shared/categoria/preguntas-service/preguntas.service';
+
 
 @Component({
   selector: 'app-formulario',
@@ -17,34 +18,48 @@ import { preguntaDto } from '../../interfaces/dtos/pregunta-dto';
   templateUrl: './formulario.component.html',
   styleUrl: './formulario.component.css'
 })
-export class FormularioComponent {
-  @Input({required: true, alias:'questions'})
-  questions!: preguntaDto[];
-  @Input({required: true, alias: 'onSubmitHandler'}) onSubmitHandler!: (formValue: any) => void; 
+export class FormularioComponent implements OnInit, OnChanges{
+  @Input() idCategoria!: number;
+  @Output() formSubmit = new EventEmitter<FormGroup>();
 
   form!: FormGroup;
+  preguntas: preguntaDto[] = [];
 
-  constructor(private fb: FormBuilder) { }
-
-  ngOnInit() {
-    this.form = this.fb.group(
-      this.questions.reduce((group: { [key: string]: any }, question) => {
-        console.log('Agregando control:', question.idPregunta);
-        group[question.idPregunta] = ['', question.validators || []];
-        return group;
-      }, {})
-    );
+  constructor() {}
+  private preguntasService = inject(PreguntasService);
+  ngOnChanges(changes: SimpleChanges): void {
+    this.buildForm();
   }
+
+  ngOnInit(): void {
+    if (this.idCategoria) {
+      this.preguntasService.getPreguntas(this.idCategoria).subscribe({
+        next: (data) => {
+          this.preguntas = data;
+          this.buildForm();
+        },
+        error: (err) => {
+          console.error('Error al cargar preguntas:', err);
+        }
+      });
+    }
+  }
+
+  buildForm(): void {
+    const group: Record<string, FormControl> = {};
+    this.preguntas.forEach(p => {
+      group[p.id.toString()] = new FormControl('', p.validators || []);
+    });
+    this.form = new FormGroup(group);
+  }
+
   getControl(id: string): FormControl {
     return this.form.get(id) as FormControl;
   }
-  onSubmit() {
+
+  onSubmit(): void {
     if (this.form.valid) {
-      if (this.onSubmitHandler) {
-        this.onSubmitHandler(this.form); 
-      }
-    }else{
-      this.form.markAllAsTouched();
+      this.formSubmit.emit(this.form);
     }
   }
 }
