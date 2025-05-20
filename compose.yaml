@@ -14,11 +14,9 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
     command: npm start
+    networks:
+      - app-network
 
-  angular-prod:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: angular-prod
-    ports:
-      - "80:80"
+networks:
+  app-network:
+    external: true

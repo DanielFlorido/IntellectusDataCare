@@ -36,4 +36,8 @@ export class NavbarComponent implements OnInit {
   isActive(ruta: string): boolean {
     return this.router.url.includes(ruta);
   }
+
+  navegarAWhisper(){
+    this.router.navigate(['/whisper']);
+  }
 }

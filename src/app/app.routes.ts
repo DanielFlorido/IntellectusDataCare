@@ -5,6 +5,7 @@ import { PacientesComponent } from './tabs/pacientes/pacientes.component';
 import { CrearPacienteComponent } from './tabs/pacientes/crearPaciente/crear-paciente/crear-paciente.component';
 import { CrearConsultaComponent } from './tabs/general/crearConsulta/crear-consulta/crear-consulta.component';
 import { ConsultaLayoutComponent } from './layout/consulta-layout/consulta-layout.component';
+import { WhisperComponent } from './tabs/whisper/whisper.component';
 
 export const routes: Routes = [
     {
@@ -35,6 +36,10 @@ export const routes: Routes = [
         ]
         }
     ]
+    },
+    {
+        path: 'whisper',
+        component: WhisperComponent
     },
     {
         path: '',

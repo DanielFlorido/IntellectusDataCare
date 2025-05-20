@@ -28,23 +28,27 @@ export class FormularioComponent implements OnInit, OnChanges{
   constructor() {}
   private preguntasService = inject(PreguntasService);
   ngOnChanges(changes: SimpleChanges): void {
-    this.buildForm();
+    if (changes['idCategoria'] && !changes['idCategoria'].firstChange) {
+      this.loadPreguntas(); 
+    }
   }
 
   ngOnInit(): void {
     if (this.idCategoria) {
-      this.preguntasService.getPreguntas(this.idCategoria).subscribe({
-        next: (data) => {
-          this.preguntas = data;
-          this.buildForm();
-        },
-        error: (err) => {
-          console.error('Error al cargar preguntas:', err);
-        }
-      });
+      this.loadPreguntas();
     }
   }
-
+  loadPreguntas(){
+    this.preguntasService.getPreguntas(this.idCategoria).subscribe({
+      next: (data) => {
+        this.preguntas = data;
+        this.buildForm();
+      },
+      error: (err) => {
+        console.error('Error al cargar preguntas', err);
+      }
+    });
+  }
   buildForm(): void {
     const group: Record<string, FormControl> = {};
     this.preguntas.forEach(p => {
