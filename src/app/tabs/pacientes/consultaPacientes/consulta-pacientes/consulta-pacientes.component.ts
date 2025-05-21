@@ -38,6 +38,11 @@ export class ConsultaPacientesComponent {
     this.consultaService.crearConsulta(this.paciente.id).subscribe({
       next: (resp) => {
         console.log('Consulta creada:', resp);
+        const consulta = {
+          id: resp.id,
+          fecha: ''
+        }
+        this.consultaService.setConsultaActual(consulta);
         this.router.navigate(['/consulta']);
       },
       error: (err) => {

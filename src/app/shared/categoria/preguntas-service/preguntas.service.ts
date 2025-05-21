@@ -6,6 +6,8 @@ import { environment } from '../../../../env/enviroment';
 import { HttpClient } from '@angular/common/http';
 import { preguntaDto } from '../../../interfaces/dtos/pregunta-dto';
 import { ConsultaService } from '../../consulta/consulta.service';
+import { RespuestaCerradaDTO } from '../../../interfaces/dtos/respuesta-cerrada-dto';
+import { RespuestaAbiertaDTO } from '../../../interfaces/dtos/respuesta-abierta-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +41,18 @@ export class PreguntasService {
     });
 
     return newSubject.asObservable();
+  }
+  guardarRespuestaCerrada(dto: RespuestaCerradaDTO): void {
+    this.http.post<void>(`${this.baseurl}/guardarCerrada`, dto).subscribe({
+      next: () => console.log('Respuesta cerrada guardada'),
+      error: err => console.error('Error al guardar respuesta cerrada', err)
+    });
+  }
+  guardarRespuestaAbierta(dto: RespuestaAbiertaDTO): void {
+    this.http.post<void>(`${this.baseurl}/guardarAbierta`, dto).subscribe({
+      next: () => console.log('Respuesta abierta guardada correctamente'),
+      error: err => console.error('Error al guardar respuesta abierta', err)
+    });
   }
 }
 
