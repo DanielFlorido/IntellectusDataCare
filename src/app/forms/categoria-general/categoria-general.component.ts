@@ -30,6 +30,9 @@ export class CategoriaGeneralComponent implements OnInit{
       }
     });
   }
+  mostrarPopup(mensaje: string): void {
+    alert(`⚠️ Error de la categoría:\n${mensaje}`);
+  }
 
   handleFormSubmit(form: FormGroup): void {
     console.log("Formulario enviado con datos:", form.value);

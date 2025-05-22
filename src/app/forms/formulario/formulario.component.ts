@@ -11,18 +11,21 @@ import { preguntaDto } from '../../interfaces/dtos/pregunta-dto';
 import { PreguntasService } from '../../shared/categoria/preguntas-service/preguntas.service';
 import { RespuestaCerradaDTO } from '../../interfaces/dtos/respuesta-cerrada-dto';
 import { ConsultaService } from '../../shared/consulta/consulta.service';
+import { RespuestaAbiertaDTO } from '../../interfaces/dtos/respuesta-abierta-dto';
+import { FijoComponent } from "../../questions/fijo/fijo.component";
 
 
 @Component({
   selector: 'app-formulario',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, OptionsComponent, TextComponent, NumberComponent, DateComponent, YesNoQuestionComponent, OptionsValueComponent],
+  imports: [ReactiveFormsModule, CommonModule, OptionsComponent, TextComponent, NumberComponent, DateComponent, YesNoQuestionComponent, OptionsValueComponent, FijoComponent],
   templateUrl: './formulario.component.html',
   styleUrl: './formulario.component.css'
 })
 export class FormularioComponent implements OnInit, OnChanges{
   @Input() idCategoria!: number;
   @Output() formSubmit = new EventEmitter<FormGroup>();
+  @Output() errorEncontrado = new EventEmitter<string>();
 
   form!: FormGroup;
   preguntas: preguntaDto[] = [];
@@ -42,54 +45,52 @@ export class FormularioComponent implements OnInit, OnChanges{
       this.loadPreguntas();
     }
   }
-  loadPreguntas(){
+  loadPreguntas(): void {
     this.preguntasService.getPreguntas(this.idCategoria).subscribe({
       next: (data) => {
         this.preguntas = data;
+        const error = this.detectarErrorEnPreguntas(this.preguntas);
+        if (error) {
+          this.errorEncontrado.emit(error);
+        }
         this.buildForm();
-        console.log('Preguntas Cargadas', this.preguntas);
-        
       },
       error: (err) => {
         console.error('Error al cargar preguntas', err);
       }
     });
   }
+
+  private detectarErrorEnPreguntas(preguntas: preguntaDto[]): string | null {
+    const preguntaConError = preguntas.find(p => p.tipoRespuesta === 'Error');
+    return preguntaConError ? preguntaConError.valor : null;
+  }
+
+  
+
   buildForm(): void {
     const group: Record<string, FormControl> = {};
 
     this.preguntas.forEach(p => {
-      const control = new FormControl(p.opcionSeleccionada ?? '', p.validators || []);
+      const control = this.crearControlParaPregunta(p);
       group[p.id.toString()] = control;
-
-      control.valueChanges.subscribe(value => {
-        const idConsulta = this.consultaService.getConsultaActualSync()?.id;
-
-        if (!idConsulta) return;
-
-        if (p.tipoRespuesta === 'Desplegable') {
-          const idOpcionListado = p.opciones?.find(opt => opt.texto === value)?.id;
-          if (idOpcionListado) {
-            const dto: RespuestaCerradaDTO = {
-              idConsulta,
-              idPregunta: p.id,
-              idOpcionListado
-            };
-            this.preguntasService.guardarRespuestaCerrada(dto);
-          }
-        } else if (['Texto', 'Numero', 'Bool', 'date'].includes(p.tipoRespuesta)) {
-          const dto: RespuestaAbiertaDTO = {
-            idConsulta,
-            idPregunta: p.id,
-            valor: value?.toString() ?? ''
-          };
-          this.preguntasService.guardarRespuestaAbierta(dto);
-        }
-      });
     });
 
     this.form = new FormGroup(group);
   }
+  private crearControlParaPregunta(p: preguntaDto): FormControl {
+    let initialValue: any = '';
+
+    if (p.tipoRespuesta === 'Desplegable' && p.opcionSeleccionada !== undefined) {
+      initialValue = p.opcionSeleccionada;
+    } else if (['Texto', 'Numero', 'Bool', 'date'].includes(p.tipoRespuesta)) {
+      initialValue = p.valorAlmacenado ?? '';
+    }
+
+    return new FormControl(initialValue, p.validators || []);
+  }
+
+
 
 
   getControl(id: string): FormControl {

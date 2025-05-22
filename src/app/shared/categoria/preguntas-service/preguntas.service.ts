@@ -43,16 +43,19 @@ export class PreguntasService {
     return newSubject.asObservable();
   }
   guardarRespuestaCerrada(dto: RespuestaCerradaDTO): void {
-    this.http.post<void>(`${this.baseurl}/guardarCerrada`, dto).subscribe({
-      next: () => console.log('Respuesta cerrada guardada'),
-      error: err => console.error('Error al guardar respuesta cerrada', err)
-    });
+    this.http.post(`${this.baseurl}/guardarCerrada`, dto, { responseType: 'text' }).subscribe({
+    next: res => console.log('Guardado OK:', res),
+    error: err => console.error('Error al guardar respuesta cerrada', err)
+  });
+
   }
   guardarRespuestaAbierta(dto: RespuestaAbiertaDTO): void {
-    this.http.post<void>(`${this.baseurl}/guardarAbierta`, dto).subscribe({
-      next: () => console.log('Respuesta abierta guardada correctamente'),
-      error: err => console.error('Error al guardar respuesta abierta', err)
-    });
+    this.http.post(`${this.baseurl}/guardarAbierta`, dto, {
+    responseType: 'text'
+  }).subscribe({
+    next: (res) => console.log('Servidor dice:', res),
+    error: (err) => console.error('Error al guardar respuesta abierta', err)
+  });
   }
 }
 

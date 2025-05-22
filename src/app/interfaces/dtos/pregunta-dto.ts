@@ -7,6 +7,9 @@ export interface preguntaDto{
     idCategoria: number,
     validators?: ValidatorFn[],
     opciones?: opcion[],
+    opcionSeleccionada: string,
+    valorAlmacenado: string,
+    valor:string
 }
 export interface opcion{
     id: number,

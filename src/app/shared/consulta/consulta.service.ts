@@ -17,7 +17,7 @@ export class ConsultaService {
 
 
   private consultaActualKey = 'consulta-actual';
-
+  
   private consultaActualSubject = new BehaviorSubject<ConsultaDto | null>(
     this.obtenerConsultaDeStorage()
   );
