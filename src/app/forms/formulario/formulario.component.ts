@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, OnChanges, EventEmitter,Output, SimpleChanges, inject } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, Input, OnInit, OnChanges, EventEmitter, Output, SimpleChanges, inject } from '@angular/core';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { OptionsComponent } from "../../questions/options/options.component";
 import { TextComponent } from "../../questions/text/text.component";
@@ -9,16 +9,15 @@ import { YesNoQuestionComponent } from "../../questions/yes-no-question/yes-no-q
 import { OptionsValueComponent } from "../../questions/options-value/options-value.component";
 import { preguntaDto } from '../../interfaces/dtos/pregunta-dto';
 import { PreguntasService } from '../../shared/categoria/preguntas-service/preguntas.service';
-import { RespuestaCerradaDTO } from '../../interfaces/dtos/respuesta-cerrada-dto';
 import { ConsultaService } from '../../shared/consulta/consulta.service';
-import { RespuestaAbiertaDTO } from '../../interfaces/dtos/respuesta-abierta-dto';
 import { FijoComponent } from "../../questions/fijo/fijo.component";
+import { GraficoQuestionComponent } from "../../questions/grafico-question/grafico-question.component";
 
 
 @Component({
   selector: 'app-formulario',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, OptionsComponent, TextComponent, NumberComponent, DateComponent, YesNoQuestionComponent, OptionsValueComponent, FijoComponent],
+  imports: [ReactiveFormsModule, CommonModule, OptionsComponent, TextComponent, NumberComponent, DateComponent, YesNoQuestionComponent, OptionsValueComponent, FijoComponent, GraficoQuestionComponent],
   templateUrl: './formulario.component.html',
   styleUrl: './formulario.component.css'
 })
@@ -29,14 +28,14 @@ export class FormularioComponent implements OnInit, OnChanges{
 
   form!: FormGroup;
   preguntas: preguntaDto[] = [];
-  
+
   constructor() {}
   private preguntasService = inject(PreguntasService);
   private consultaService = inject(ConsultaService);
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['idCategoria'] && !changes['idCategoria'].firstChange) {
-      this.loadPreguntas(); 
+      this.loadPreguntas();
     }
   }
 
@@ -50,7 +49,7 @@ export class FormularioComponent implements OnInit, OnChanges{
       next: (data) => {
         this.preguntas = data;
         console.log(this.preguntas);
-        
+
         const error = this.detectarErrorEnPreguntas(this.preguntas);
         if (error) {
           this.errorEncontrado.emit(error);
@@ -68,7 +67,7 @@ export class FormularioComponent implements OnInit, OnChanges{
     return preguntaConError ? preguntaConError.valor : null;
   }
 
-  
+
 
   buildForm(): void {
     const group: Record<string, FormControl> = {};

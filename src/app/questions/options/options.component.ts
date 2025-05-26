@@ -19,7 +19,7 @@ export class OptionsComponent implements OnInit{
   @Input('control')
   control!:FormControl;
   private preguntasService = inject(PreguntasService);
-  private consultaService = inject(ConsultaService);
+  private readonly consultaService = inject(ConsultaService);
   ngOnInit(): void {
   this.control.valueChanges.subscribe(value => {
     const idConsulta = this.consultaService.getConsultaActualSync()?.id;

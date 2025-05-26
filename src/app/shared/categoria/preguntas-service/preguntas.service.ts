@@ -8,9 +8,10 @@ import { preguntaDto } from '../../../interfaces/dtos/pregunta-dto';
 import { ConsultaService } from '../../consulta/consulta.service';
 import { RespuestaCerradaDTO } from '../../../interfaces/dtos/respuesta-cerrada-dto';
 import { RespuestaAbiertaDTO } from '../../../interfaces/dtos/respuesta-abierta-dto';
+import { RespuestaGraficoDto } from '../../../interfaces/dtos/respuesta-grafica-dto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PreguntasService {
   private baseurl = environment.apiUrl;
@@ -18,7 +19,10 @@ export class PreguntasService {
 
   // Mapa para cachear preguntas por categoría
   private preguntasMap = new Map<number, preguntaDto[]>();
-  private preguntasSubjectMap = new Map<number, BehaviorSubject<preguntaDto[]>>();  
+  private preguntasSubjectMap = new Map<
+    number,
+    BehaviorSubject<preguntaDto[]>
+  >();
   private consultaService = inject(ConsultaService);
   constructor() {}
 
@@ -33,30 +37,40 @@ export class PreguntasService {
     // Creamos un nuevo Subject vacío mientras llegan los datos
     const newSubject = new BehaviorSubject<preguntaDto[]>([]);
     this.preguntasSubjectMap.set(idCategoria, newSubject);
-    
+
     // Pedimos al servidor y guardamos en cache
-    this.http.get<preguntaDto[]>(`${this.baseurl}/pregunta/${idCategoria}/${consultaId}`).subscribe((data) => {
-      this.preguntasMap.set(idCategoria, data);
-      newSubject.next(data);
-    });
+    this.http
+      .get<preguntaDto[]>(
+        `${this.baseurl}/pregunta/${idCategoria}/${consultaId}`
+      )
+      .subscribe((data) => {
+        this.preguntasMap.set(idCategoria, data);
+        newSubject.next(data);
+      });
 
     return newSubject.asObservable();
   }
   guardarRespuestaCerrada(dto: RespuestaCerradaDTO): void {
-      this.http.post(`${this.baseurl}/guardarCerrada`, dto, { responseType: 'text' }).subscribe({
-      next: res => console.log('Guardado OK:', res),
-      error: err => console.error('Error al guardar respuesta cerrada', err)
-    });
-
-    }
-    guardarRespuestaAbierta(dto: RespuestaAbiertaDTO): void {
-      this.http.post(`${this.baseurl}/guardarAbierta`, dto, {
-      responseType: 'text'
-    }).subscribe({
-      next: (res) => console.log('Servidor dice:', res),
-      error: (err) => console.error('Error al guardar respuesta abierta', err)
-    });
+    this.http
+      .post(`${this.baseurl}/guardarCerrada`, dto, { responseType: 'text' })
+      .subscribe({
+        next: (res) => console.log('Guardado OK:', res),
+        error: (err) =>
+          console.error('Error al guardar respuesta cerrada', err),
+      });
+  }
+  guardarRespuestaAbierta(dto: RespuestaAbiertaDTO): void {
+    this.http
+      .post(`${this.baseurl}/guardarAbierta`, dto, {
+        responseType: 'text',
+      })
+      .subscribe({
+        next: (res) => console.log('Servidor dice:', res),
+        error: (err) =>
+          console.error('Error al guardar respuesta abierta', err),
+      });
+  }
+  guardarRespuestaGrafico(payload: RespuestaGraficoDto): Observable<string> {
+    return this.http.post<string>(`${this.baseurl}/guardarGrafica`, payload,{responseType: 'text' as 'json'});
   }
 }
-
-
