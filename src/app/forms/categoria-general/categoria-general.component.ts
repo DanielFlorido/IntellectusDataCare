@@ -7,11 +7,12 @@ import { CategoriaService } from '../../shared/categoria/categoria-service/categ
 import { CommonModule } from '@angular/common';
 import { TrasntornosSelectorComponent } from "../trasntornosSelector/trasntornos-selector.component";
 import { TranstornosTabComponent } from "../../tabs/transtornos-tab/transtornos-tab.component";
+import { MedicosTabComponent } from "../../tabs/medicos-tab/medicos-tab.component";
 
 @Component({
   selector: 'app-categoria-general',
   standalone: true,
-  imports: [ReactiveFormsModule, FormularioComponent, CommonModule, TranstornosTabComponent],
+  imports: [ReactiveFormsModule, FormularioComponent, CommonModule, TranstornosTabComponent, MedicosTabComponent],
   templateUrl: './categoria-general.component.html',
   styleUrl: './categoria-general.component.css'
 })

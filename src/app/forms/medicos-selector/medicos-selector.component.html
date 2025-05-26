@@ -1,0 +1,10 @@
+<div *ngFor="let group of forms(); let i = index" [formGroup]="group" class="medico-selector">
+  <label>Médico {{ i + 1 }}:</label>
+  <select formControlName="medico">
+    <option [ngValue]="null">Seleccione un médico</option>
+    <option *ngFor="let m of medicos()" [ngValue]="m.id">{{ m.nombre }}</option>
+  </select>
+  <button type="button" (click)="eliminar(i)" *ngIf="forms().length > 1">Eliminar</button>
+</div>
+
+<button type="button" (click)="agregarSelector()">Agregar otro médico</button>
