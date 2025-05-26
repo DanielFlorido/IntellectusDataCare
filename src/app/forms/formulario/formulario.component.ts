@@ -49,6 +49,8 @@ export class FormularioComponent implements OnInit, OnChanges{
     this.preguntasService.getPreguntas(this.idCategoria).subscribe({
       next: (data) => {
         this.preguntas = data;
+        console.log(this.preguntas);
+        
         const error = this.detectarErrorEnPreguntas(this.preguntas);
         if (error) {
           this.errorEncontrado.emit(error);
