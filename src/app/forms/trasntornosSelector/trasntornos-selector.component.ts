@@ -34,9 +34,7 @@ export class TrasntornosSelectorComponent implements OnChanges {
 
   @Input() preseleccion: SeleccionTrastornoDTO | null = null;
   constructor() {   
-    this.service.obtenerTranstornos().subscribe(this.transtornos.set);
-    console.log('1',this.preseleccion);
-    
+    this.service.obtenerTranstornos().subscribe(this.transtornos.set);   
     this.form.get('tipoTrastorno')?.valueChanges.pipe(
       tap(() => {
         this.form.get('transtornoGeneral')?.reset();
@@ -68,6 +66,7 @@ export class TrasntornosSelectorComponent implements OnChanges {
         this.service.obtenerTranstornosEspecificos(transtornoGeneralId).subscribe(especificos => {
           this.transtornosEspecificos.set(especificos);
           this.form.patchValue({ transtornoEspecifico: transtornoEspecificoId }, { emitEvent: false });
+          this.onAgregarTrastorno();
         });
       });
     }

@@ -26,14 +26,15 @@ export class TranstornosTabComponent implements OnInit{
   }
 
   onAgregarTrastorno(trastorno: any) {
-    const yaExiste = this.seleccionados().some(t => t.tipoTrastornoId === trastorno.id);
+    const yaExiste = this.seleccionados().some(t => t.transtornoId === trastorno.id);
+    
     if (!yaExiste) {
       this.seleccionados.update(arr => [...arr, trastorno]);
     }
   }
 
   guardar() {
-    const ids = this.seleccionados().map(t => t.tipoTrastornoId);
+    const ids = this.seleccionados().map(t => t.id ?? t.transtornoEspecificoId);
     if(this.consulta){
       this.service.sincronizarTrastornoEspecificoConsulta(this.consulta.id, ids).subscribe({
         next: (res) => {
