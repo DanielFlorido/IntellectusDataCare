@@ -6,6 +6,7 @@ import { CrearPacienteComponent } from './tabs/pacientes/crearPaciente/crear-pac
 import { CrearConsultaComponent } from './tabs/general/crearConsulta/crear-consulta/crear-consulta.component';
 import { ConsultaLayoutComponent } from './layout/consulta-layout/consulta-layout.component';
 import { WhisperComponent } from './tabs/whisper/whisper.component';
+import { ArchivosTabComponent } from './tabs/archivos-tab/archivos-tab.component';
 
 export const routes: Routes = [
     {
@@ -17,14 +18,10 @@ export const routes: Routes = [
         component: CrearPacienteComponent,
         title: 'Crear Paciente'
     },
-    {    
+    {
     path: 'consulta',
     component: ConsultaLayoutComponent, // 🔁 nuevo Layout Component
     children: [
-        {
-        path: '',
-        component: CrearConsultaComponent // navbar + selección inicial
-        },
         {
         path: ':areaNombre',
         component: AreaComponent,
@@ -40,6 +37,10 @@ export const routes: Routes = [
     {
         path: 'whisper',
         component: WhisperComponent
+    },
+    {
+      path: 'archivos',
+      component: ArchivosTabComponent
     },
     {
         path: '',

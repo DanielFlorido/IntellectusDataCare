@@ -12,10 +12,9 @@ import { Observable } from 'rxjs';
   standalone: true,
   imports: [CommonModule, RouterOutlet, RouterLink, RouterModule],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnInit {
-  
   pacienteActual$!: Observable<PacienteListadoDto | null>;
   items: area[] = [];
 
@@ -24,7 +23,7 @@ export class NavbarComponent implements OnInit {
   private router = inject(Router);
 
   ngOnInit(): void {
-    this.areaService.getAreas().subscribe(data => this.items = data);
+    this.areaService.getAreas().subscribe((data) => (this.items = data));
     this.pacienteActual$ = this.pacienteService.getPacienteActual(); // Reactivo
   }
 
@@ -37,7 +36,10 @@ export class NavbarComponent implements OnInit {
     return this.router.url.includes(ruta);
   }
 
-  navegarAWhisper(){
+  navegarAWhisper() {
     this.router.navigate(['/whisper']);
+  }
+  navegarAarchivo() {
+    this.router.navigate(['/archivos']);
   }
 }

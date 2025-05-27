@@ -1,0 +1,16 @@
+<h3>Archivos del paciente</h3>
+
+<ul *ngIf="archivos.length > 0; else sinArchivos">
+  <li *ngFor="let archivo of archivos" class="mb-2">
+    <strong>{{ archivo.nombreArchivo }}</strong> ({{ archivo.tipoArchivo }})
+    <button (click)="descargar(archivo)">Descargar</button>
+  </li>
+</ul>
+
+<ng-template #sinArchivos>
+  <p>No hay archivos registrados.</p>
+</ng-template>
+
+<hr />
+<label for="archivo">Subir nuevo archivo:</label>
+<input type="file" (change)="onArchivoSeleccionado($event)" />
