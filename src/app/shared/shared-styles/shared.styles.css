@@ -34,7 +34,7 @@ select {
   /* Azul oscuro */
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 12px;
+  font-size: 19px;
 }
 input[type="radio"] {
   margin-right: 5px;
@@ -81,12 +81,12 @@ input[readonly] {
 }
 .error{
   color: red;
-  position:static; 
+  position:static;
 }
 
 .container{
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   gap: 10px;
   align-items: center;
   justify-content: center;
