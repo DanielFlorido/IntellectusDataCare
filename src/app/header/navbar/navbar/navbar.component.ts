@@ -42,4 +42,9 @@ export class NavbarComponent implements OnInit {
   navegarAarchivo() {
     this.router.navigate(['/archivos']);
   }
+
+  cerrarConsulta(){
+    this.pacienteService.limpiarPacienteActual();
+    this.router.navigate(["/"]);
+  }
 }
