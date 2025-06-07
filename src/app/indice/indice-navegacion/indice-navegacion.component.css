@@ -23,8 +23,9 @@
         }
     }
 
-    .activo {
+    li.activo {
         font-weight: bold;
         color: blue;
+        background: #e3e3e3;
     }
 }

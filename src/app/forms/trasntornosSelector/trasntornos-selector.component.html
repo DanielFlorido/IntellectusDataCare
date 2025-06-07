@@ -1,0 +1,29 @@
+<form [formGroup]="form" class="trastornos-form">
+  <label>Tipo de Trastorno:</label>
+  <select formControlName="tipoTrastorno">
+    <option [ngValue]="null">Seleccione</option>
+    <option *ngFor="let t of transtornos()" [ngValue]="t.id">
+      {{ t.nombre }}
+    </option>
+  </select>
+
+  <label *ngIf="transtornosGenerales().length">Trastorno General:</label>
+  <select *ngIf="transtornosGenerales().length" formControlName="transtornoGeneral">
+    <option [ngValue]="null">Seleccione</option>
+    <option *ngFor="let g of transtornosGenerales()" [ngValue]="g.id">
+      {{ g.nombre }}
+    </option>
+  </select>
+
+  <label *ngIf="transtornosEspecificos().length">Trastorno Específico:</label>
+  <select *ngIf="transtornosEspecificos().length" formControlName="transtornoEspecifico">
+    <option [ngValue]="null">Seleccione</option>
+    <option *ngFor="let e of transtornosEspecificos()" [ngValue]="e.id">
+      {{ e.nombre }} ({{ e.cie10 }} - {{ e.dsmV }})
+    </option>
+  </select>
+
+  <button type="button" (click)="onAgregarTrastorno()" [disabled]="!form.get('transtornoEspecifico')?.value">
+    Agregar Trastorno
+  </button>
+</form>

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { WhisperService } from '../../shared/whisper/whisper.service';
+import { ConsultaService } from '../../shared/consulta/consulta.service';
 
 @Component({
   selector: 'app-whisper-form',

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Question } from '../../interfaces/question';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { preguntaDto } from '../../interfaces/dtos/pregunta-dto';
 
 @Component({
   selector: 'app-date',
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class DateComponent {
   @Input('question')
-  question!:Question;
+  question!:preguntaDto;
   @Input('control')
   control!: FormControl;
 }

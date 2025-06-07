@@ -1,0 +1,7 @@
+<h3>Seleccionar médicos</h3>
+<app-medicos-selector
+  [preseleccionados]="medicosGuardados()"
+  #medicosRef>
+</app-medicos-selector>
+
+<button (click)="guardarMedicos(medicosRef.obtenerSeleccionados())">Guardar Médicos</button>

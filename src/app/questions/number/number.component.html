@@ -1,5 +1,5 @@
 <div class="pregunta">
-    <label>{{question.label}}</label>
+    <label>{{question.textoPregunta}}</label>
     <input [formControl]= "control" type="number" />
     <div class="error" *ngIf="control.invalid && control.touched">
       <small *ngIf="control.errors?.['required']">El campo es obligatorio.</small>

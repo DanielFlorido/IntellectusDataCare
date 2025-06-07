@@ -1,7 +1,38 @@
-<nav>
-    <ul>
-        <li *ngFor= "let item of items"  [routerLink]="item.route">
-            <a >{{item.label}}</a>
-        </li>
-    </ul>
+<nav *ngIf="pacienteActual$ | async as pacienteActual">
+  <ul >
+    <li *ngFor="let item of items" class="nav-item">
+      <a
+        class="nav-link"
+        [class.activo]="isActive(item.nombre)"
+        (click)="navegarAArea(item)"
+        href="javascript:void(0)"
+      >
+        {{ item.nombre }}
+      </a>
+    </li>
+    <li class="nav-item">
+      <a (click)="navegarAWhisper()"
+        class="nav-link"
+        href="javascript:void(0)"
+      >
+        Whisper
+      </a>
+    </li>
+    <li class="nav-item">
+      <a (click)="navegarAarchivo()"
+        class="nav-link"
+        href="javascript:void(0)"
+      >
+        Archivos
+      </a>
+    <li>
+    <li class="nav-item">
+      <a (click)="cerrarConsulta()"
+        class="nav-link"
+        href="javascript:void(0)"
+      >
+        Cerrar consulta
+      </a>
+    </li>
+  </ul>
 </nav>

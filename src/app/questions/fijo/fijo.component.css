@@ -1,0 +1,13 @@
+.fijo {
+  margin-bottom: 1rem;
+
+}
+
+.fijo-input {
+  border: none;
+  background-color: #f4f4f4;
+  color: #333;
+  padding: 6px;
+  width: 100%;
+  text-align: center;
+}

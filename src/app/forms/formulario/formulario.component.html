@@ -1,11 +1,18 @@
 <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div *ngFor="let question of questions">
-        <app-options *ngIf="question.type==='select'" [question]="question" [control]="getControl(question.id)"></app-options>
-        <app-text *ngIf="question.type==='text'" [question]="question" [control]="getControl(question.id)"></app-text>
-        <app-number *ngIf="question.type==='number'" [question]="question" [control]="getControl(question.id)"></app-number>
-        <app-date *ngIf="question.type==='date'" [question]="question" [control]="getControl(question.id)"></app-date>
-        <app-yes-no-question *ngIf="question.type==='yesNo'" [question]="question" [control]="getControl(question.id)"></app-yes-no-question>
-        <app-options-value *ngIf="question.type=== 'selectValue'" [question]="question" [control]="getControl(question.id)"></app-options-value>
-    </div>  
-    <button type="submit">Enviar</button>
-</form> 
+  <div *ngFor="let question of preguntas">
+    <app-options *ngIf="question.tipoRespuesta === 'Desplegable'" [question]="question" [control]="getControl(question.id.toString())"></app-options>
+    <app-text *ngIf="question.tipoRespuesta === 'Texto'" [question]="question" [control]="getControl(question.id.toString())"></app-text>
+    <app-number *ngIf="question.tipoRespuesta === 'Numero'" [question]="question" [control]="getControl(question.id.toString())"></app-number>
+    <app-date *ngIf="question.tipoRespuesta === 'date'" [question]="question" [control]="getControl(question.id.toString())"></app-date>
+    <app-yes-no-question *ngIf="question.tipoRespuesta === 'Bool'" [question]="question" [control]="getControl(question.id.toString())"></app-yes-no-question>
+    <app-options-value *ngIf="question.tipoRespuesta === 'selectValue'" [question]="question" [control]="getControl(question.id.toString())"></app-options-value>
+    <app-fijo *ngIf="question.tipoRespuesta === 'Fijo'" [question]="question"></app-fijo>
+
+    <app-grafico-question *ngIf="question.tipoRespuesta === 'grafica'"
+    [question]="question"
+    [controlGroup]="form">
+
+    </app-grafico-question>
+
+  </div>
+</form>

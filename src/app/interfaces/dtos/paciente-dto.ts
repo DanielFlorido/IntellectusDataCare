@@ -1,4 +1,6 @@
-export interface pacienteDto{
-    cedula: number,
-    nombre: string
+export interface pacienteDto {
+    nombre: string;
+    cedula: string;
+    fechaNacimiento: string; // ISO string para LocalDate
+    lateralidad: string;
 }

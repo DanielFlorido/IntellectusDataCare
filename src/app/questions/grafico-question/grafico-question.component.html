@@ -1,0 +1,16 @@
+<!-- graph-question.component.html -->
+<div class="mb-4">
+  <h3>{{ question.textoPregunta }}</h3>
+  <div *ngFor="let seccion of question.secciones">
+    <h4 >Sección: {{ seccion.nombre }}</h4>
+
+    <div *ngFor="let parte of seccion.partes" class="mb-2">
+      <label>{{ parte.texto }}</label>
+      <input
+        type="number"
+        class="form-control"
+        [formControl]="getFormControl(getControlName(seccion, parte))"
+      />
+    </div>
+  </div>
+</div>

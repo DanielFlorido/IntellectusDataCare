@@ -1,0 +1,7 @@
+<div class="component" *ngIf="categoriaActual">
+  <h2>{{ categoriaActual.nombre }}</h2>
+  <app-formulario [idCategoria]="categoriaActual.id" (formSubmit)="handleFormSubmit($event)" (errorEncontrado)="mostrarPopup($event)" />
+  <app-transtornos-tab *ngIf="categoriaActual.nombre === 'Conclusiones generales'"></app-transtornos-tab>
+  <app-medicos-tab *ngIf="categoriaActual.nombre === 'Conclusiones generales'"></app-medicos-tab>
+  <button *ngIf="categoriaActual.nombre === 'Conclusiones generales'" (click)="descargarInforme()">Descargar Informe Final</button>
+</div>

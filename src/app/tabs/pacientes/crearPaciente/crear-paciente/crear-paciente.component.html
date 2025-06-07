@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input id="nombre" formControlName="nombre" type="text" />
+    </div>
+
+    <div>
+        <label for="cedula">Cédula:</label>
+        <input id="cedula" formControlName="cedula" type="text" />
+    </div>
+
+    <div>
+        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+        <input id="fechaNacimiento" formControlName="fechaNacimiento" type="date" />
+    </div>
+
+    <div>
+        <label for="lateralidad">Lateralidad:</label>
+        <select id="lateralidad" formControlName="lateralidad">
+            <option value="">Seleccione</option>
+            <option value="Izquierda">Izquierda</option>
+            <option value="Derecha">Derecha</option>
+            <option value="Ambidiestro">Ambidiestro</option>
+        </select>
+    </div>
+
+    <button type="submit">Crear Paciente</button>
+</form>

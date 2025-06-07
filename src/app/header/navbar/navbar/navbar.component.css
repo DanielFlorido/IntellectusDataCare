@@ -1,31 +1,51 @@
 nav {
     background-color: #0033a0;
     margin-top: 0px;
-}
-nav ul{
-    padding-inline-start: 5%;
-    padding-inline-end: 5%;
-    display: flex;
-    flex-direction: row;
-    flex-basis: auto;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    margin-block-start: 0px;
-}
-li{
-    align-content: center;
-    height: 40px;
-    padding: 2px;
-    flex-grow: 1;
-    list-style: none;
-    color: white;
-    text-align: center;
-}
-li:hover{
-    border-style: solid;
-    border-color: white;
-    border-bottom: 0px;
-    border-top: 0px;
-    border-radius: 10px;
+    ul {
+        padding-inline-start: 5%;
+        padding-inline-end: 5%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 0;
+    }
+    li{
+        height: auto;
+    }
+    .nav-item {
+        list-style: none;
+        flex-grow: 1;
+        text-align: center;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .nav-link {
+        display: block;
+        color: white;
+        text-decoration: none;
+        padding: 8px;
+        border-radius: 8px;
+
+        &:hover {
+            border-style: solid;
+            border-color: white;
+            border-bottom: 0px;
+            border-top: 0px;
+            border-radius: 10px;
+        }
+
+        &.activo {
+            border-style: solid;
+            border-color: white;
+            border-bottom: 0px;
+            border-top: 0px;
+            border-radius: 10px;
+        }
+
+        &:visited {
+            color: white; 
+        }
+    }
 }

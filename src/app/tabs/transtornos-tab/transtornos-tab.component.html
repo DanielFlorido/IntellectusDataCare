@@ -1,0 +1,20 @@
+<div *ngIf="selecciones().length">
+      <h3>Editar Trastornos paciente:</h3>
+      <app-trasntornos-selector
+      *ngFor="let sel of selecciones()"
+        [preseleccion]="sel"
+        (agregar)="onAgregarTrastorno($event)"
+      > 
+      </app-trasntornos-selector>
+</div>
+
+<hr />
+<h3>Agregar nuevo trastorno:</h3>
+<app-trasntornos-selector (agregar)="onAgregarTrastorno($event)"></app-trasntornos-selector>
+<h3>Trastornos seleccionados:</h3>
+<ul>
+  <li *ngFor="let t of seleccionados()">
+    {{ t.nombre }} ({{ t.cie10 }} - {{ t.dsmV }})
+  </li>
+</ul>
+<button (click)="guardar()">Guardar trastornos</button>

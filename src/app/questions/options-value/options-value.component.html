@@ -1,8 +1,9 @@
 <div class="pregunta" >
-    <label>{{question.label}}</label>
+    <label>{{question.textoPregunta}}</label>
     <select [formControl] = "control">   
-        <option *ngFor="let option of question.optionsValue" [value]="option.value">
-            {{ option.label }}
+        <option *ngFor="let option of question.opciones" >
+            <!-- arriba borre [[value]="question.value"] para cuando toque llenar datos-->
+            {{ option.texto }}
         </option>
     </select>
     <div class="error" *ngIf= "control.invalid && control.touched">

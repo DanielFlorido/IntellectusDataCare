@@ -1,12 +1,11 @@
 <div class="pregunta" >
-    <label>{{question.label}}</label>
+    <label>{{question.textoPregunta}}</label>
     <select [formControl] = "control">   
-        <option *ngFor="let option of question.options" [value]="option">
-            {{ option }}
+        <option *ngFor="let option of question.opciones" [value]="option.id">
+            {{ option.texto }}
         </option>
     </select>
     <div class="error" *ngIf= "control.invalid && control.touched">
         <small *ngIf="control.errors?.['required']">Se requiere la pregunta</small> 
-        <!-- aqui se pueden agregar todos los errores de select :3 -->
     </div>
 </div>
